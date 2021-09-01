@@ -1,0 +1,274 @@
+{% load static %}
+{% load crispy_forms_tags humanize %}
+
+{% block content %}
+
+<p class="text-right text-muted">Fecha de postulación: {{postulante.enviada|date:"d/m/Y"}}</p>
+
+<h4 class="col-4"><strong>Datos</strong></h4>
+
+<table class="table table-striped table-bordered display table-sm">
+  <thead>
+    <tr>
+      <th class="text-center">#</th>
+      <th class="text-center">Rut</th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Cargo al que postula</th>
+      <th class="text-center">Correo</th>
+      <th class="text-center">Teléfono</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="tex-center">1</td>
+      <td class="text-center">{{postulante.rut}}</td>
+      <td class="text-center">{{postulante.nombre}} {{postulante.apellido_p}} {{postulante.apellido_m}}</td>
+      <td class="text-center">{{postulante.cargo}}</td>
+      <td class="text-center">{{postulante.email}}</td>
+      <td class="text-center">{{postulante.telefono}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="col-4"><strong>Datos Laborales</strong></h4>
+
+<table class="table table-striped table-bordered display table-sm">
+  <thead>
+    <tr>
+      <th class="text-center">Título</th>
+      <th class="text-center">Años de experiencia</th>
+      <th class="text-center">Disponibilidad</th>
+      <th class="text-center">Nivel de Inglés</th>
+      <th class="text-center">Dominio de herramientas tecnológicas</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">{{postulante.titulo}}</td>
+      <td class="text-center"> {{postulante.años}}</td>
+      <td class="text-center">{% for disponibilidad in postulante.disponibilidad.all %} |{{disponibilidad.name}}|  {% endfor %}</td>
+      <td class="text-center">{{postulante.nivel_ingles}}</td>
+      <td class="text-center">{% for dominio in postulante.nivel_tec.all %} <li>{{dominio.name}}</li>  {% endfor %} </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="col-4"><strong>Archivos</strong></h4>
+
+<table class="table table-striped table-bordered display table-sm">
+  <thead>
+    <tr>
+      <th class="text-center">CV</th>
+      <th class="text-center">Otros documentos</th>
+    </tr>
+  </thead>
+ <tbody>
+    <tr>
+      <td class="text-center"><a href="{{postulante.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+      {% if postulante.otros_documentos %}
+      <td class="text-center"><a href="{{postulante.otros_documentos.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+       {% else %}
+       <td class="text-center">No hay otros documentos</td>
+       {% endif %}
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="col-4"><strong>Colegios al que postula</strong></h4>
+
+<table  class="table table-striped table-bordered display table-sm">
+  <thead>
+    <tr>
+      <th class="text-center">#</th>
+      <th class="text-center">Preferencia 1</th>
+      <th class="text-center">Preferencia 2</th>
+      <th class="text-center">Preferencia 3</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">1</td>
+      <td class="text-center">{{postulante.colegio1}}</td>
+      <td class="text-center"> {% if postulante.colegio2 == None %} <p>No hay más preferencias</p> {% else %} {{postulante.colegio2}} {% endif %}</td>
+      <td class="text-center"> {% if postulante.colegio3 == None %} <p>No hay más preferencias</p> {% else %} {{postulante.colegio3}} {% endif %}</td>
+
+    </tr>
+  </tbody>
+</table>
+  <h4 class="col-4"><strong>Referencias</strong></h4>
+  <table class="table table-striped table-bordered display table-sm">
+    <thead>
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Correo</th>
+        <th class="text-center">Cargo</th>
+        <th class="text-center">Institución</th>
+        <th class="text-center">Teléfono</th>
+        <th class="text-center">Relación laboral</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center">1</td>
+        <td class="text-center">{{postulante.nombre_r}}</td>
+        <td class="text-center">{{postulante.corre_r}}</td>
+        <td class="text-center">{{postulante.cargo_r}}</td>
+        <td class="text-center">{{postulante.instituto_r}}</td>
+        <td class="text-center">{{postulante.telefono_r}}</td>
+        <td class="text-center">{{postulante.relacion_r}}</td>
+      </tr>
+      <tr>
+        <td class="text-center">2</td>
+        <td class="text-center">{{postulante.nombre_r_2}}</td>
+        <td class="text-center">{{postulante.corre_r_2}}</td>
+        <td class="text-center">{{postulante.cargo_r_2}}</td>
+        <td class="text-center">{{postulante.instituto_r_2}}</td>
+        <td class="text-center">{{postulante.telefono_r_2}}</td>
+        <td class="text-center">{{postulante.relacion_r_2}}</td>
+      </tr>
+    </tbody>
+  </table>
+<form action="{% url 'rectores:info' postulante.pk %}" method="post" novalidate>
+<br>
+<div class="panel panel-default">
+    <div class="panel-body">
+
+    {% csrf_token %}
+    {{ formset.management_form|crispy }}
+    {% if postulante.Siguiente == False %}
+    <div class="row">
+      <div class="col-4">
+        <input class="a b c"  type="checkbox" name="Siguiente" id="Siguiente" onclick="disable()">
+        <label class="form-check-label" for="Siguiente"> Entrevistar </label>
+
+
+        <br>
+      </div>
+      <div class="col-4">
+        <input class="d b c" type="checkbox" name="rechazar_index" id="rechazar_index" onclick="disabler()">
+        <label class="form-check-label" for="rechazar_index"> Rechazar</label>
+
+        <br>
+      </div>
+
+    {% else %}
+    <p></p>
+    {% endif %}
+
+    {% if postulante.colegio2 == None %}
+
+    {% else %}
+    {% if postulante.liberar_2 == False%}
+    <div class="col-4">
+      <input class="d a c" type="checkbox" name="liberar_2" id="liberar_2" onclick="disableb()">
+      <label class="form-check-label" for="liberar_2"> Liberar preferencia 2</label>
+
+      <br>
+    </div>
+    {% else %}
+    <p>Liberado Preferencia 2</p>
+    {% endif %}
+    {% endif %}
+
+    {% if postulante.colegio3 == None %}
+
+    {% else %}
+    {% if postulante.liberar_2 == True %}
+    <div class="col-4">
+      <input class="d a b " type="checkbox" name="liberar_3" id="liberar_3" onclick="disablec()">
+      <label class="form-check-label" for="liberar_3"> Liberar preferencia 3</label>
+    </div>
+    {% else %}
+    {% if postulante.liberar_3 == True %}
+    <div class="col-4">
+      <p>Liberado preferencia 3</p>
+    </div>
+    {% else %}
+    <div class="col-4">
+      <p></p>
+    </div>
+
+
+
+    {% endif %}
+    {% endif %}
+
+    {% endif %}
+
+</div>
+</div>
+<div class="row" >
+  <div class="col-lg-12 text-right" >
+
+    <input type="submit" class="btn btn-primary" name="submit" value="Guardar">
+
+    
+    <button type="button" class="btn btn-default" onclick="return cerrar_modal()">Cerrar</button>
+  </div>
+</div>
+</form>
+
+
+<script>
+  function disable() {
+    var elements = document.getElementsByClassName("d");
+    document.getElementById("Siguiente").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, Siguiente) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = Siguiente;
+    }
+  }
+</script>
+
+<script>
+  function disabler() {
+    var elements = document.getElementsByClassName("a");
+    document.getElementById("rechazar_index").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, rechazar_index) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = rechazar_index;
+    }
+  }
+</script>
+
+<script>
+  function disableb() {
+    var elements = document.getElementsByClassName("b");
+    document.getElementById("liberar_2").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, liberar_2) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = liberar_2;
+    }
+  }
+</script>
+
+<script>
+  function disablec() {
+    var elements = document.getElementsByClassName("c");
+    document.getElementById("liberar_3").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, liberar_3) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = liberar_3;
+    }
+  }
+</script>
+
+{% endblock %}

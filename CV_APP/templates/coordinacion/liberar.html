@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<br>
+<h1 class="text-center">Liberar psicolaboral</h1>
+<p>Postulante: {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}} </p>
+<p>Colegio: {{postulantes.colegio1}}</p>
+
+<br>
+<div class="text-center">
+
+</div>
+
+<div id="popup"></div>
+
+<form method="post" enctype="multipart/form-data">
+
+
+
+    {% csrf_token %}
+  <div class="row">
+   <div class="col-4"> {{form.coordinador_entrevisto|as_crispy_field}}</div>
+   <div class="col-4"> {{form.observaciones_c|as_crispy_field}}</div>
+  </div>
+
+    {{ form.liberar_coordinador|as_crispy_field }}
+<ul>
+    <li>
+        <input class="a"  type="checkbox" name="psicologa1" id="psicologa1" onclick="disable()">
+        <label class="form-check-label" for="psicologa1"> A Daisy Lasen </label>
+    </li>
+    <li>
+        <input class="d"  type="checkbox" name="psicologa2" id="psicologa2" onclick="disabler()">
+        <label class="form-check-label" for="psicologa2"> A María Francisca Molina </label>
+    </li>
+</ul>
+
+
+<br>
+        <button type="submit" class="btn btn-success btn-md">Guardar</button>
+
+</form>
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+
+<script>
+    function disable() {
+      var elements = document.getElementsByClassName("d");
+      document.getElementById("psicologa1").checked ? doIt(elements, true) : doIt(elements, false);
+
+    }
+
+    function doIt(elements, psicologa1) {
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].disabled = psicologa1;
+      }
+    }
+</script>
+
+<script>
+    function disabler() {
+      var elements = document.getElementsByClassName("a");
+      document.getElementById("psicologa2").checked ? doIt(elements, true) : doIt(elements, false);
+
+    }
+
+    function doIt(elements, psicologa2) {
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].disabled = psicologa2;
+      }
+    }
+</script>
+
+{% endblock %}

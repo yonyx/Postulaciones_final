@@ -1,0 +1,45 @@
+@media (max-width: 576px){
+    .col-2 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    }
+    
+    .col-4 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    }
+    
+    .col-6 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    }
+    
+    .col-sm-6 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    }
+    .test{
+        -ms-flex: 0 0 95%;
+        flex: 0 0 95%;
+        max-width: 95%;
+    }
+}
+
+
+body{
+    background-color: #143c96;
+    font-family: 'Work Sans';
+}
+#panel, #flip {
+    padding: 5px;
+    border: solid 1px #c3c3c3;
+}
+  
+#panel {
+    padding: 50px;
+    display: none;
+}

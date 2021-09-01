@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include 'rector/header.html' with active='new5' %}
+<br>
+<div class="table-responsive">
+    <table id="example" class=" table table-striped table-bordered display table-sm" >
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">Postulante</th>
+                <th class="text-center" scope="col">Cargo</th>
+                <th class="text-center" scope="col">Título</th>
+                <th class="text-center" scope="col">Colegio</th>
+                <th class="text-center" scope="col">CV</th>
+
+                <th class="text-center">Fecha de postulación</th>
+                <th class="text-center">Rúbricas aplicadas</th>
+                <th class="text-center">Clase demostrativa</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for postulante in postulantes %}
+            {% if postulante.postulacion.colegio1 == colegio %}
+
+            <tr>
+                <td class="text-center"><a onclick="return abrir_modal('{% url 'rectores:info' postulante.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulante.postulacion.nombre}} {{postulante.postulacion.apellido_p}} {{postulante.postulacion.apellido_m}}</a></td>
+
+                <td class="text-center">{{postulante.postulacion.cargo}}</td>
+                <td class="text-center">{{postulante.postulacion.titulo}}</td>
+                <td class="text-center"> {{postulante.postulacion.colegio1}} </td>
+                <td class="text-center"><a href="{{postulante.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+
+                <td class="text-center">{{postulante.postulacion.enviada|date:"d/m/Y"}}</td>
+                <td class="text-center">
+                    <a href="{% url 'rectores:vista_rubrica' postulante.pk %}" class="btn btn-primary btn-sm"> Ver entrevista</a>
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'rectores:rubrica_demo' postulante.postulacion.pk %}" class="btn btn-primary btn-sm pulse">Clase Demostrativa</a>
+                </td>
+                </tr>
+
+            </tr>
+            {% endif %}
+        {% endfor %}
+<!--    -->
+
+            {% for postulante in postulantes2 %}
+            {% if postulante.postulacion.colegio2 == colegio %}
+
+            <tr>
+                <td class="text-center"><a onclick="return abrir_modal('{% url 'rectores:info' postulante.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulante.postulacion.nombre}} {{postulante.postulacion.apellido_p}} {{postulante.postulacion.apellido_m}}</a></td>
+
+                <td class="text-center">{{postulante.postulacion.cargo}}</td>
+                <td class="text-center">{{postulante.postulacion.titulo}}</td>
+                <td class="text-center"> {{postulante.postulacion.colegio1}} </td>
+                <td class="text-center"><a href="{{postulante.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+
+                <td class="text-center">{{postulante.postulacion.enviada|date:"d/m/Y"}}</td>
+                <td class="text-center">
+                    <a href="{% url 'rectores:vista_rubrica' postulante.pk %}" class="btn btn-primary btn-sm"> Ver entrevista</a>
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'rectores:rubrica_demo' postulante.postulacion.pk %}" class="btn btn-primary btn-sm pulse">Clase Demostrativa</a>
+                </td>
+                </tr>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+<!--    -->
+            {% for postulante in postulantes3 %}
+            {% if postulante.postulacion.colegio3 == colegio %}
+
+            <tr>
+                <td class="text-center"><a onclick="return abrir_modal('{% url 'rectores:info' postulante.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulante.postulacion.nombre}} {{postulante.postulacion.apellido_p}} {{postulante.postulacion.apellido_m}}</a></td>
+
+                <td class="text-center">{{postulante.postulacion.cargo}}</td>
+                <td class="text-center">{{postulante.postulacion.titulo}}</td>
+                <td class="text-center"> {{postulante.postulacion.colegio1}} </td>
+                <td class="text-center"><a href="{{postulante.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+
+                <td class="text-center">{{postulante.postulacion.enviada|date:"d/m/Y"}}</td>
+                <td class="text-center">
+                    <a href="{% url 'rectores:vista_rubrica' postulante.pk %}" class="btn btn-primary btn-sm"> Ver entrevista</a>
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'rectores:rubrica_demo' postulante.postulacion.pk %}" class="btn btn-primary btn-sm pulse">Clase Demostrativa</a>
+                </td>
+                </tr>
+
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+<div id="popup"></div>
+
+
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+{% endblock %}

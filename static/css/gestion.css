@@ -1,0 +1,9 @@
+body {
+
+    background: url("/static/img/news.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+  
+    
+  }

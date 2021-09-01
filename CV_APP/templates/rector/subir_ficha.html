@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<br>
+<h1 class="text-center">Subir ficha FAT</h1>
+<p>Postulante: {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}} </p>
+<p>Colegio: {{postulantes.colegio1}}</p>
+
+<br>
+<div class="text-center">
+
+</div>
+
+<div id="popup"></div>
+
+<form method="post" enctype="multipart/form-data">
+
+   
+        
+        {% csrf_token %}
+        {{ formset.management_form|crispy }}
+        <div class="col-4" >{{form.ficha_fat|as_crispy_field}}</div> 
+
+
+        <button type="submit" class="btn btn-success btn-md">Subir ficha FAT</button> 
+
+</form>
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+    
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+{% endblock %}

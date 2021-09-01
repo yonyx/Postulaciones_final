@@ -1,0 +1,210 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontello-2f186091/css/fontello.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/animations.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/rubrica.css" %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> 
+    <title>Rubrica</title>
+</head>
+<body >
+    
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+        <h3 class="text-center">Clase Demostrativa</h3>  
+        <br>
+        <p>Nombre Postulante: {{rubrica.postulacion.nombre}} {{rubrica.postulacion.apellido_p}} {{rubrica.postulacion.apellido_m}}</p>
+        <p>Nombre observador: {{ user.first_name }}  {{user.last_name}} </p>
+
+
+
+        <div class="table-responsive">
+
+            <table  class="table-striped "  >
+                <thead>
+                    <tr style=" text-align: center;">
+                        <th >Criterios de observación</th>
+
+                    </tr>
+                </thead>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ formset.management_form|crispy }}
+                    <tbody >
+                        <tr>
+                            <td>Comunica los aprendizajes esperados de la clase acorde a las características del grupo. </td>
+                            <td>{{rubrica.criterio_1}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Da a conocer de manera clara la forma de trabajo y criterios de evaluación de la clase.  </td>
+                            <td>{{rubrica.criterio_2}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Utiliza recursos de calidad para desarrollar las actividades propuestas.  </td>
+                            <td>{{rubrica.criterio_3}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Formula preguntas abiertas y desafiantes que promueven el pensamiento crítico. </td>
+                            <td>{{rubrica.criterio_4}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Organiza a los estudiantes para que realicen tareas que involucre el desarrollo de habilidades.  </td>
+                            <td>{{rubrica.criterio_5}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Promueve que los estudiantes conecten conceptos, asignaturas o temas.  </td>
+                            <td>{{rubrica.criterio_6}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Incentiva en los estudiantes la formulación de preguntas.  </td>
+                            <td>{{rubrica.criterio_7}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Proporciona retroalimentación oportuna a los estudiantes.  </td>
+                            <td>{{rubrica.criterio_8}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Incorpora experiencias de aprendizaje directo.  </td>
+                            <td>{{rubrica.criterio_9}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Demuestra hablidades de manejo de grupo. </td>
+                            <td>{{rubrica.criterio_10}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Demuestra habilidades de manejo de tiempo. </td>
+                            <td>{{rubrica.criterio_11}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Se expresa con un lenguaje pertinente a la disciplina. </td>
+                            <td>{{rubrica.criterio_12}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Enfrenta los errores con apertura y los utiliza como instancia de aprendizaje.  </td>
+                            <td>{{rubrica.criterio_13}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>La clase finaliza con una instancia de cierre que permita levantar evidencia de los aprendizajes alcanzados.  </td>
+                            <td>{{rubrica.criterio_14}}</td>
+
+                        </tr>
+                        
+                        
+                    </tbody>
+                    <br>
+                    <thead>
+                        <tr>
+                            <th>Clima de aprendizaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Genera un ambiente de trabajo grato para aprender. </td>
+                            <td>{{rubrica.criterio_15}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Desarrolla actividades donde potencia la participación de todos los estudiantes. </td>
+                            <td>{{rubrica.criterio_16}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Incentiva la colaboración y el respeto entre estudiantes. </td>
+                            <td>{{rubrica.criterio_17}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Refuerza de manera positiva y acertiva los logros de estudiantes. </td>
+                            <td>{{rubrica.criterio_18}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Aplica estrategas de buena convivencia cuando es necesario.  </td>
+                            <td>{{rubrica.criterio_19}}</td>
+
+                        </tr>
+                        <tr>
+                            <td> Observaciones Generales</td>
+                            <td>{{rubrica.observaciones}}</td>
+                        </tr>
+                    </tbody>
+                    <br>
+            </table>
+            <br>
+
+            <br>
+
+            <br>
+
+            <br>
+
+        </div>
+        <br> 
+
+
+        <br>
+        <div>
+            <a href="{% url 'coordinacion:index' %}" class="btn btn-info"> Cancelar </a>
+        </div>
+    </form>
+    <br>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static "js/jquery.plugin.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+    <script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!--Script que suma de manera inmediata-->
+    <script>
+        function sumar() {
+            var total = 0;
+            $(".monto").each(function() {
+
+            if (isNaN(parseFloat($(this).val()))) {
+                total += 0;
+            } else {
+                total += parseFloat($(this).val());
+            }
+        });
+        //alert(total);
+        document.getElementById('spTotal').innerHTML = total;
+
+        }
+    </script>
+
+</body>

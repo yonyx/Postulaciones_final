@@ -1,0 +1,16 @@
+body{
+    background-image: url(https://www.bostoneduca.cl/images/head_work.jpg?v16);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Work Sans';
+}
+#panel, #flip {
+    padding: 5px;
+    border: solid 1px #c3c3c3;
+}
+  
+#panel {
+    padding: 50px;
+    display: none;
+}

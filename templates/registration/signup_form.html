@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container" style="align-content: center;">
+    <div class="row">
+      <div class="col-md-8 col-sm-10 col-12">
+        <h2>Registrar {{ user_type }}</h2>
+        <br>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ next }}">
+        <div class="row"> 
+          <div class="col-4">{{form.first_name|as_crispy_field}}</div>
+          <div class="col-4">{{form.last_name|as_crispy_field}}</div>
+          <div class="col-10">{{form.email|as_crispy_field}}</div>
+          <div class="col-4">{{form.password1|as_crispy_field}}</div>
+          <div class="col-4">{{form.password2|as_crispy_field}}</div>
+          <div class="col-8">{{form.colegio|as_crispy_field}}</div>
+
+        </div>
+          <button type="submit" class="btn btn-success">Registrar</button>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

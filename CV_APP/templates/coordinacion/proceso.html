@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'coordinacion/header.html' with active='new3' %}
+
+<br>
+<div class="table-responsive">
+    <table id="example" class="table table-striped table-bordered display table-sm">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Postulante</th>
+                <th class="text-center">Cargo</th>
+                <th class="text-center"> Nivel de inglés </th>
+                <th class="text-center">Título</th>
+                <th class="text-center">Colegio</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Fecha de postulación</th>
+                <th class="text-center">Rúbricas aplicadas</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for postulante in postulante %}
+        {% if postulante.cargo.id == 6 %}
+
+        {% else %}
+        {% if postulante.cargo.id == 7 %}
+
+        {% else %}
+            <tr>
+                <td class="text-center">{{forloop.counter}}</td>
+                <td class="text-center">
+                    <a onclick="return abrir_modal('{% url 'coordinacion:info' postulante.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulante.nombre}} {{postulante.apellido_p}} {{postulante.apellido_m}}</a>
+                </td>
+                <td class="text-center">
+                    {{postulante.cargo}}
+                </td>
+                <td class="text-center">{{postulante.nivel_ingles}}</td>
+
+                <td class="text-center">{{postulante.titulo}}</td>
+                <td class="text-center">
+                    {{postulante.colegio1}}
+                </td>
+                {% if postulante.entrevistado == False %}
+                <td class="text-center"><span class="badge badge-pill badge-primary pulse">Entrevista</span></td>
+                {%else%}
+                {% if postulante.aprobar_demos == False  %}
+                <td class="text-center"><span class="badge badge-pill badge-primary pulse ">Clase Demostrativa</span></td>
+                {% else %}
+                {% if postulante.psicologa == False %}
+                <td class="text-center"><span class="badge badge-pill badge-primary pulse">Entrevista Psicolaboral</span></td>
+                {% else %}
+                {% if postulante.aceptada == False %}
+                <td class="text-center"><span class="badge badge-pill badge-primary pulse">En espera Oferta Laboral</span></td>
+                {% else %}
+                {% if postulante.send == False %}
+                <td class="text-center"><span class="badge badge-pill badge-primary pulse">En espera Recursos Humanos</span></td>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                <td class="text-center">{{postulante.enviada|date:"d/m/Y"}}</td>
+
+                {% if postulante.entrevistado == True  %}
+                <td class="text-center"><a href="{% url 'coordinacion:rubricas' postulante.pk %}" class="btn btn-primary btn-sm "> Rúbricas</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endif %}
+
+        {% endfor %}
+        </tbody>
+        <div id="popup"></div>
+
+    </table>
+
+
+</div>
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+{% endblock %}

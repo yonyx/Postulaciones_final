@@ -1,0 +1,252 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontello-2f186091/css/fontello.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/animations.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/rubrica.css" %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <title>Rubrica</title>
+</head>
+<body >
+
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+        <h3 class="text-center">Clase demostrativa</h3>
+        <br>
+        <p>Nombre Postulante: {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}}</p>
+        <p>Nombre observador: {{ user.first_name }}  {{user.last_name}} </p>
+
+
+
+        <div class="table-responsive">
+
+            <table  class="table-striped "  >
+                <thead>
+                    <tr style=" text-align: center;">
+                        <th >Criterios de observación</th>
+
+                    </tr>
+                </thead>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ formset.management_form|crispy }}
+                    <tbody >
+                        <tr>
+                            <td>Comunica los aprendizajes esperados de la clase acorde a las características del grupo. </td>
+                            <td>{{formset.criterio_1|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Da a conocer de manera clara la forma de trabajo y criterios de evaluación de la clase.  </td>
+                            <td>{{formset.criterio_2|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Utiliza recursos de calidad para desarrollar las actividades propuestas.  </td>
+                            <td>{{formset.criterio_3|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Formula preguntas abiertas y desafiantes que promueven el pensamiento crítico. </td>
+                            <td>{{formset.criterio_4|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Organiza a los estudiantes para que realicen tareas que involucre el desarrollo de habilidades.  </td>
+                            <td>{{formset.criterio_5|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Promueve que los estudiantes conecten conceptos, asignaturas o temas.  </td>
+                            <td>{{formset.criterio_6|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Incentiva en los estudiantes la formulación de preguntas.  </td>
+                            <td>{{formset.criterio_7|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Proporciona retroalimentación oportuna a los estudiantes.  </td>
+                            <td>{{formset.criterio_8|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Incorpora experiencias de aprendizaje directo.  </td>
+                            <td>{{formset.criterio_9|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Demuestra hablidades de manejo de grupo. </td>
+                            <td>{{formset.criterio_10|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Demuestra habilidades de manejo de tiempo. </td>
+                            <td>{{formset.criterio_11|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Se expresa con un lenguaje pertinente a la disciplina. </td>
+                            <td>{{formset.criterio_12|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Enfrenta los errores con apertura y los utiliza como instancia de aprendizaje.  </td>
+                            <td>{{formset.criterio_13|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>La clase finaliza con una instancia de cierre que permita levantar evidencia de los aprendizajes alcanzados.  </td>
+                            <td>{{formset.criterio_14|as_crispy_field}}</td>
+
+                        </tr>
+
+
+                    </tbody>
+                    <br>
+                    <thead>
+                        <tr>
+                            <th>Clima de aprendizaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Genera un ambiente de trabajo grato para aprender. </td>
+                            <td>{{formset.criterio_15|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Desarrolla actividades donde potencia la participación de todos los estudiantes. </td>
+                            <td>{{formset.criterio_16|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Incentiva la colaboración y el respeto entre estudiantes. </td>
+                            <td>{{formset.criterio_17|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Refuerza de manera positiva y acertiva los logros de estudiantes. </td>
+                            <td>{{formset.criterio_18|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Aplica estrategias de buena convivencia cuando es necesario.  </td>
+                            <td>{{formset.criterio_19|as_crispy_field}}</td>
+
+                        </tr>
+                        <tr>
+                            <td> Observaciones Generales</td>
+                            <td>{{formset.observaciones}}</td>
+                        </tr>
+                    </tbody>
+                    <br>
+            </table>
+            <br>
+
+            <br>
+
+            <br>
+
+            <br>
+
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4">
+                <input class="a b"  type="checkbox" name="aprobar_demos" id="aprobar_demos" onclick="disable()">
+                <label class="form-check-label" for="aprobar_demos"> Aprobar </label>
+
+            </div>
+             <div class="col-4">
+                <input class="d b" type="checkbox" name="rechazar_demos" id="rechazar_demos" onclick="disabler()">
+                <label class="form-check-label" for="rechazar_demos"> Rechazar</label>
+
+                <br>
+             </div>
+
+        </div>
+
+        <br>
+        <div>
+            <button type="submit" class="btn btn-success btn-md">Guardar</button>
+            <a href="{% url 'rectores:clasedemo' %}" class="btn btn-info"> Cancelar </a>
+        </div>
+    </form>
+    <br>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static "js/jquery.plugin.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+    <script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!--Script que suma de manera inmediata-->
+    <script>
+        function sumar() {
+            var total = 0;
+            $(".monto").each(function() {
+
+            if (isNaN(parseFloat($(this).val()))) {
+                total += 0;
+            } else {
+                total += parseFloat($(this).val());
+            }
+        });
+        //alert(total);
+        document.getElementById('spTotal').innerHTML = total;
+
+        }
+    </script>
+
+    <script>
+  function disable() {
+    var elements = document.getElementsByClassName("d");
+    document.getElementById("aprobar_demos").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, aprobar_demos) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = aprobar_demos;
+    }
+  }
+</script>
+
+<script>
+  function disabler() {
+    var elements = document.getElementsByClassName("a");
+    document.getElementById("rechazar_demos").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, rechazar_demos) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = rechazar_demos;
+    }
+  }
+</script>
+
+</body>

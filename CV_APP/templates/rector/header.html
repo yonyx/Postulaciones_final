@@ -1,0 +1,52 @@
+{% if user.is_authenticated and user.is_rector %}
+{% load static %}
+<!--<link rel="stylesheet" href="{% static "css/menu.css" %}">--> 
+{% for colegio in user.rector.colegio.all %}
+<img src=" {{ colegio.imagen.url }} " class="img-fluid" style="width: 18%;"/>
+{% endfor %}
+
+<div class="text-right">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>  {{ user.first_name }}  {{user.last_name}}<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'user' %}" target="_blank"> <i class="fas fa-user-cog"></i> Información de Usuario</a></li>
+    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+  </ul>
+</div>
+
+
+
+<br>
+
+{% endif %}
+
+
+
+
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link {% if active == 'new' %} active{% endif %}"  href="{% url 'rectores:index' %}"  >Postulantes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if active == 'new2' %} active{% endif %} "  href="{% url 'rectores:entrevistas' %}" >Entrevistas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if active == 'new5' %} active{% endif %}" href="{% url 'rectores:clasedemo' %}">Clase demostrativa</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if active == 'new4' %} active{% endif %}" href="{% url 'rectores:aprobados' %}">Estado psicolaboral</a>
+    </li>
+    <li>
+      <a class="nav-link {% if active == 'new8' %} active{% endif %}"  href="{% url 'rectores:oferta_view' %}">Oferta laboral</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if active == 'new6' %} active{% endif %}" href="{% url 'rectores:rechazados' %}">No sigue proceso</a>
+    </li>
+
+  <li class="nav-item">
+      <a class="nav-link {% if active == 'new7' %} active{% endif %}" href="{% url 'rectores:fin' %}">Finalizados</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if active == 'new1' %} active{% endif %}" href="{% url 'rectores:finr' %}">Reemplazos finalizados</a>
+  </li>
+</ul>

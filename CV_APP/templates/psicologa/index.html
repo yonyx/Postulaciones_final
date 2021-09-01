@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+{% include 'psicologa/header.html' with active='new' %}
+
+<br>
+
+<div class="table-responsive">
+    <table id="example" class=" table table-striped table-bordered display table-sm" >
+        <thead>
+            <tr>
+                <th style="text-align: center;" scope="col">Postulante</th>
+                <th style="text-align: center;" scope="col">Cargo</th>
+                <th style="text-align: center;" scope="col">Colegio</th>
+                <th style="text-align: center;" scope="col">Años Experiencia</th>
+                <th style="text-align: center;" scope="col">CV</th>
+                <th style="text-align: center;" scope="col">Fecha de postulación</th>
+
+                <th class="text-center">Rúbricas aplicadas</th>
+                <th>Rúbrica</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for postulante in postulantes %}
+        {% if user.psicologa.psicologa1 %}
+        {% if postulante.psicologa1 %}
+            <tr>
+                <td class="text-center">
+                    <a onclick="return abrir_modal('{% url 'psicologa:info' postulante.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulante.nombre}} {{postulante.apellido_p}} {{postulante.apellido_m}}</a>
+                </td>
+                <td class="text-center">{{postulante.cargo}}</td>
+                <td class="text-center"> {{postulante.colegio1}}</td>
+
+                <td style="text-align: center;">{{postulante.años}}</td >
+                <td class="text-center"><a href="{{postulante.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+                <td class="text-center">{{postulante.enviada|date:"d/m/Y"}}</td>
+
+                <td class="text-center">
+                    <a href="{% url 'psicologa:rubricas' postulante.pk %}" class="btn btn-primary btn-sm"> Rúbricas</a>
+
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'psicologa:rubrica' postulante.pk %}" class="btn btn-primary btn-sm pulse"> Entrevistar</a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endif %}
+        {% if user.psicologa.psicologa2 %}
+        {% if postulante.psicologa2 %}
+
+        <tr>
+            <td class="text-center">
+                <a onclick="return abrir_modal('{% url 'psicologa:info' postulante.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulante.nombre}} {{postulante.apellido_p}} {{postulante.apellido_m}}</a>
+            </td>
+            <td class="text-center">{{postulante.cargo}}</td>
+            <td class="text-center"> {{postulante.colegio1}}</td>
+
+            <td style="text-align: center;">{{postulante.años}}</td >
+            <td class="text-center"><a href="{{postulante.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+            <td class="text-center">{{postulante.enviada|date:"d/m/Y"}}</td>
+
+            <td class="text-center">
+                <a href="{% url 'psicologa:rubricas' postulante.pk %}" class="btn btn-primary btn-sm"> Rúbricas</a>
+
+            </td>
+            <td class="text-center">
+                <a href="{% url 'psicologa:rubrica' postulante.pk %}" class="btn btn-primary btn-sm pulse"> Entrevistar</a>
+            </td>
+        </tr>
+        {% endif %}
+    {% endif %}
+        {% endfor %}
+
+        {% for postulantes_c in postulantes_c %}
+        {% if user.psicologa.psicologa1 %}
+        {% if postulantes_c.postulacion.psicologa1 %}
+        <tr>
+            <td class="text-center"><a onclick="return abrir_modal('{% url 'psicologa:info' postulantes_c.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulantes_c.postulacion.nombre}} {{postulantes_c.postulacion.apellido_p}} {{postulantes_c.postulacion.apellido_m}}</a></td>
+
+            <td class="text-center">{{postulantes_c.postulacion.cargo}}</td>
+            <td  class="text-center" style="text-align: center;"> {{postulantes_c.postulacion.colegio1}}</td>
+
+            <td class="text-center" style="text-align: center;">{{postulantes_c.postulacion.años}}</td >
+            <td class="text-center"><a href="{{postulantes_c.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+            <td class="text-center">{{postulantes_c.postulacion.enviada|date:"d/m/Y"}}</td>
+
+            <td class="text-center">
+                <a href="{% url 'psicologa:vista_rubrica_coordinador' postulantes_c.pk %}" class="btn btn-primary btn-sm"> Rubrica</a>
+            </td>
+            <td class="text-center">
+                <a href="{% url 'psicologa:rubrica' postulantes_c.postulacion.pk %}" class="btn btn-primary btn-sm pulse"> Entrevistar</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% if user.psicologa.psicologa2 %}
+        {% if postulantes_c.postulacion.psicologa2 %}
+
+        <tr>
+            <td class="text-center"><a onclick="return abrir_modal('{% url 'psicologa:info' postulantes_c.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulantes_c.postulacion.nombre}} {{postulantes_c.postulacion.apellido_p}} {{postulantes_c.postulacion.apellido_m}}</a></td>
+
+            <td class="text-center">{{postulantes_c.postulacion.cargo}}</td>
+            <td  class="text-center" style="text-align: center;"> {{postulantes_c.postulacion.colegio1}}</td>
+
+            <td class="text-center" style="text-align: center;">{{postulantes_c.postulacion.años}}</td >
+            <td class="text-center"><a href="{{postulantes_c.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+            <td class="text-center">{{postulantes_c.postulacion.enviada|date:"d/m/Y"}}</td>
+
+            <td class="text-center">
+                <a href="{% url 'psicologa:vista_rubrica_coordinador' postulantes_c.pk %}" class="btn btn-primary btn-sm"> Rubrica</a>
+            </td>
+            <td class="text-center">
+                <a href="{% url 'psicologa:rubrica' postulantes_c.postulacion.pk %}" class="btn btn-primary btn-sm pulse"> Entrevistar</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        {% for postulantes_c in postulante_em %}
+        {% if user.psicologa.psicologa1 %}
+        {% if postulantes_c.postulacion.psicologa1 %}
+        <tr>
+            <td class="text-center"><a onclick="return abrir_modal('{% url 'psicologa:info' postulantes_c.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulantes_c.postulacion.nombre}} {{postulantes_c.postulacion.apellido_p}} {{postulantes_c.postulacion.apellido_m}}</a></td>
+
+            <td class="text-center">{{postulantes_c.postulacion.cargo}}</td>
+            <td  class="text-center" style="text-align: center;"> {{postulantes_c.postulacion.colegio1}}</td>
+            <td class="text-center" style="text-align: center;">{{postulantes_c.postulacion.años}}</td >
+            <td class="text-center"><a href="{{postulantes_c.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+            <td class="text-center">{{postulantes_c.postulacion.enviada|date:"d/m/Y"}}</td>
+
+            <td class="text-center">
+                <a href="{% url 'psicologa:vista_rubrica_equipo' postulantes_c.pk %}" class="btn btn-primary btn-sm"> Rubricas</a>
+            </td>
+            <td class="text-center">
+                <a href="{% url 'psicologa:rubrica' postulantes_c.postulacion.pk %}" class="btn btn-primary btn-sm pulse"> Entrevistar</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% if user.psicologa.psicologa2 %}
+        {% if postulantes_c.postulacion.psicologa2 %}
+        <tr>
+            <td class="text-center"><a onclick="return abrir_modal('{% url 'psicologa:info' postulantes_c.postulacion.pk %}','Postulante')" data-toggle="tooltip"  title="Ver Información">{{postulantes_c.postulacion.nombre}} {{postulantes_c.postulacion.apellido_p}} {{postulantes_c.postulacion.apellido_m}}</a></td>
+
+            <td class="text-center">{{postulantes_c.postulacion.cargo}}</td>
+            <td  class="text-center" style="text-align: center;"> {{postulantes_c.postulacion.colegio1}}</td>
+            <td class="text-center" style="text-align: center;">{{postulantes_c.postulacion.años}}</td >
+            <td class="text-center"><a href="{{postulantes_c.postulacion.cv.url}}" target="_blank"><i class="fas fa-file-download"></i></a></td>
+            <td class="text-center">{{postulantes_c.postulacion.enviada|date:"d/m/Y"}}</td>
+
+            <td class="text-center">
+                <a href="{% url 'psicologa:vista_rubrica_equipo' postulantes_c.pk %}" class="btn btn-primary btn-sm"> Rubricas</a>
+            </td>
+            <td class="text-center">
+                <a href="{% url 'psicologa:rubrica' postulantes_c.postulacion.pk %}" class="btn btn-primary btn-sm pulse"> Entrevistar</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+
+<div id="popup"></div>
+
+
+
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load static %}
+{% load crispy_forms_tags humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+
+        <span class="mb-3">Estimada(o)</span>
+        <p> El postulante fue aprobado por la psicóloga.</p>
+        <p><strong> Postulante:  {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}}</strong> </p>
+        <p><strong> Cargo: {{postulantes.cargo}}</strong> </p>
+<br>
+<br>
+        Saludos cordiales.
+        <br>
+        <br>
+
+
+        <footer>
+            <br>
+            <hr>
+            <a href="https://www.bostoneduca.cl/">
+                <img   src="https://www.bostoneduca.cl/images/logo.jpg?v13" height="70px" class=" img-fluid rounded"  alt="">
+            </a>
+        </footer>
+
+    </body>
+</html>

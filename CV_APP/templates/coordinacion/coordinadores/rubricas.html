@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<br>
+<h1 class="text-center">Rubricas</h1>
+<p>Postulante: {{postulacion.nombre}} {{postulacion.apellido_p}} {{postulacion.apellido_m}} </p>
+<p>Colegio: {{postulacion.colegio1}}</p>
+<br>
+<div class="text-center">
+{% for postulante in postulantes %}
+<a href="{% url 'coordinadores:vista_rubrica_coordinador' postulante.pk %}" class="btn btn-primary btn-sm"> Ver rúbrica</a>
+
+{% endfor %}
+
+{% for postulante_em in postulante_em %}
+<a href="{% url 'coordinadores:vista_rubrica_equipo' postulante_em.pk %}" class="btn btn-primary btn-sm"> Rubrica Equipo Multidiciplinario</a>
+
+{% endfor %}
+
+{% for postulante_demo in postulante_demo %}
+<a href="{% url 'coordinadores:vista_rubrica_demo' postulante_demo.pk %}" class="btn btn-primary btn-sm"> Clase Demostrativa</a>
+
+{% endfor %}
+</div>
+
+<div id="popup"></div>
+
+
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+    
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+{% endblock %}

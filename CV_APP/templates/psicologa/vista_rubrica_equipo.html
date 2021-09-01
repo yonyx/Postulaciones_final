@@ -1,0 +1,315 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontello-2f186091/css/fontello.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/animations.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/rubrica.css" %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <title>Rúbrica</title>
+</head>
+<body>
+    <br>
+
+    <div class="container-responsive">
+        <br>
+
+            <h3 class="text-center">Rúbrica equipo multidiciplinario</h3>
+        <br>
+        <p class="text-muted">Realizada por: {{rubrica.owner.first_name}} {{rubrica.owner.last_name}}</p>
+        <p> <strong>Postulante:</strong> {{rubrica.postulacion.nombre}} {{rubrica.postulacion.apellido_p}} {{rubrica.postulacion.apellido_m}} </p>
+        <p> <strong>Cargo al que postula:</strong> {{rubrica.postulacion.cargo}}</p>
+        <p><strong>Puntos Totales:</strong> {{puntos.suma}}</p>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <br>
+                <table  class=" table table-striped table-bordered table-sm  display " >
+                    <thead>
+                        <tr>
+                            <th style="vertical-align: text-top; text-align: center;">Dimensiones y preguntas tipo</th>
+                            <th class="text-center">Insatisfactorio <hr> 0 pt. </th>
+                            <th class="text-center">En desarrollo <hr> 1 pt. </th>
+                            <th class="text-center">Adecuado <hr>2 pts. </th>
+                            <th class="text-center">Superior <hr>3 pts. </th>
+
+                            <th style="vertical-align: text-top; text-align: center;">Indicadores esperados</th>
+                            <th style="vertical-align: text-top; text-align: center;">Puntaje por dimension</th>
+                            <th style="vertical-align: text-top; text-align: center;">Observaciones que fundamenten el puntaje</th>
+                        </tr>
+                    </thead>
+                    <form method="post" enctype="multipart/form-data">
+
+                        <tbody>
+
+
+                            <tr>
+                                <td>
+                                    <strong>1.</strong> Profesional como persona:
+                                   <li>Con todos los desafíos que implica trabajar en forma diferenciada, ¿por qué elegiste esta profesión?  </li>
+                                   <li>¿Cuáles son tus fortalezas y debilidades como profesional?</li>
+                                </td>
+                                <td>No comunica claramente su vocación ni provee ejemplos concretos. <hr> Describe vagamente sus fortalezas.</td>
+                                <td>Comunica claramente una idea general, pero la respuesta carece de especificidad. <hr> Describe algunas fortalezas. </td>
+                                <td>Comunica con claridad y da algunos ejemplos (concretos y abstractos). <hr> Identifica fortalezas y debilidades en forma general ejemplificando algunas de ellas </td>
+                                <td>Comunica efectivamente con detalles de su pasión y dedicación a la profesión utilizando ejemplos. <hr> Identifica claramente fortalezas y debilidades dando ejemplos específicos. </td>
+                                <td>
+                                    <li>Demuestra entusiasmo por el trabajo en equipo multidisciplinario.</li>
+                                    <li>Valora la interacción con los estudiantes y profesionales de la educación como parte fundamental del trabajo.</li>
+                                    <li>Posee un alto nivel de motivación por su profesión. </li>
+
+                                </td>
+                                    <td style="text-align: center;">{{rubrica.puntos }}</td>
+                                    <td>{{rubrica.comentario}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2.</strong> Planificar para la estimulación y/o desarrollo de habilidades:
+                                    <hr>
+                                    <li>¿Crees que es importante planificar?, ¿por qué?  </li>
+                                    <li>¿Qué criterios usas para planificar una intervención?</li>
+                                    <li>Piensa en una intervención que hayas realizado recientemente y describe cómo la planificaste. </li>
+                                </td>
+                                <td>No define planes de intervención claros y secuenciados que favorezcan el aprendizaje y/o el proceso de reenseñanza. </td>
+                                <td>Realiza planificación de largo y corto plazo, pero las contempla como unidades aisladas. </td>
+                                <td>Se enfoca en la distribución correcta del tiempo a fin de alcanzar todos los objetivos anuales y consolidar habilidades necesarias para el logro de aprendizajes, pero no incorpora al profesor en el proceso de planificación. </td>
+                                <td>Prioriza la reenseñanza y el desarrollo de habilidades descendidas,  alineando los planes de corto plazo con los de largo plazo para relacionar contenidos y conceptos previos y futuros. Proceso planificado en conjunto con el profesor.</td>
+                                <td>
+                                    <li>Secuencia el plan de intervención, destacando las habilidades o contenidos que se encuentran descendidos.</li>
+                                    <li>Durante la reenseñanza, relaciona conceptos con conocimientos previos.</li>
+                                    <li> Selecciona los objetivos de la intervención y alinea las actividades a los mismos.</li>
+                                    <li>Planifica con el profesor las intervenciones dentro y fuera del aula común.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos2 }}</td>
+                                <td>{{rubrica.comentario2}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3.</strong> Gestión en el trabajo con equipos:
+                                    <li>Cuando desarrollas un trabajo en equipo, ¿qué importancia le das a los plazos y calidad del trabajo?</li>
+                                    <li>¿Cómo trabajas colaborativamente con los especialistas o profesor?</li>
+                                    <li>¿Qué trabajo has realizado en equipo?, ¿cómo ha sido la experiencia?</li>
+                                </td>
+                                <td>No identifica el valor del trabajo colaborativo para su función.  </td>
+                                <td>Demuestra conocer la relevancia del trabajo colaborativo con diferentes actores, pero le cuesta visualizar la importancia de su función como parte de un proceso más amplio, en función de los aprendizajes de los estudiantes. </td>
+                                <td>Demuestra la importancia del trabajo colaborativo y su rol en el proceso de aprendizaje, pero no ha tenido experiencia en el trabajo colaborativo con el profesor.  </td>
+                                <td>Demuestra la importancia del trabajo colaborativo para garantizar el logro de  aprendizajes significativos y de calidad. Identifica el valor del trabajo con los distintos miembros del equipo.  </td>
+                                <td>
+                                    <li> Identifica prácticas que promueven el trabajo colaborativo. </li>
+                                    <li>Identifica la importancia de su trabajo como parte de un proceso amplio en función de los aprendizajes de los estudiantes.  </li>
+                                    <li>Describe experiencia de trabajo colaborativo con equipos de profesores, equipo directivo y su propio equipo multidisciplinario.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos3 }}</td>
+                                <td>{{rubrica.comentario3}}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>4.</strong> Gestión del aprendizaje.
+                                    <hr>
+                                <strong>4A.</strong>   Gestión de la contención de estudiantes para apoyar el clima de aprendizaje:
+                                    <li>¿Qué variables del clima de clase consideras importantes para aprender?, ¿cómo los intencionas?</li>
+                                    <li>Cuéntame una situación en la que hayas tenido dificultad con la conducta de un estudiante y lo que hiciste para abordar la situación.  </li>
+
+                                </td>
+                                <td>No cuenta con experiencia ni considera necesario el trabajo sistemático y coordinado. </td>
+                                <td>No cuenta con experiencia en el trabajo sistemático con estrategias de contención que aborden a los distintos actores de la comunidad, pero le entrega valor a este tipo de trabajo coordinado y sistemático. </td>
+                                <td>Cuenta con experiencia en el trabajo sistemático con estrategias de contención adecuadas, pero no involucra a los ditintos actores de la comunidad educativa. </td>
+                                <td>Cuenta con experiencia donde ha desarrollado un trabajo sistemático con estrategias de contención, adecuadas a las NEE de los estudiantes. Involucra a los distintos actores de la comunidad educativa.</td>
+                                <td>
+                                    <li> Conoce estrategias para trabajar la contención de estudiantes,  que favorezcan el clima de aprendizaje.</li>
+                                    <li> Ha logrado resolver situaciones complejas, utilizando variables como el feedback, trabajo colabarativo y habilidades blandas para el trabajo con estudiantes con NEE.</li>
+                                    <li> Diseña sus intervenciones de manera sistemática con estrategias que involucran a los apoderados, estudiantes y profesores. </li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos4 }}</td>
+                                <td>{{rubrica.comentario4}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4B.</strong> Promoción de altas expectativas:
+                                    <li> Describe cómo promueves altas expectativas de logro en los alumnos que presentan algún tipo de necesidad educativa especial.</li>
+                                    <li> Dame un ejemplo de una intervención en la que hayas desafiado académicamente a los alumnos.</li></td>
+                                <td>No cuenta con experiencia ni considera necesario el levantamiento de estrategias, acompañamiento ni feedback para promover las altas expectativas. </td>
+                                <td>No cuenta con experiencia, pero considera fundamental que el trabajo de altas expectativas se complemente de estrategias, acompañamiento y feedback. </td>
+                                <td>Cuenta con experiencia en el trabajo sistemático con el estudiante, pero no en el involucramiento activo de los demás actores.</td>
+                                <td>Cuenta con experiencia en el trabajo de altas expectativas, incorporando estrategias académicas, acompañamiento y feedback tanto con el estudiantes como con profesores y apoderados. </td>
+                                <td>
+                                    <li>Diseña un plan de trabajo donde incorpora estrategias académicas, acompañamiento y feedback adecuado al estudiante. </li>
+                                    <li>Apoya a los estudiantes con NEE a través de estrategias que promuevan la metacognición, el logro de objetivos y la autonomía en el aprendizaje. </li>
+                                    <li>Transmite y genera altas expectativas a los profesionales a cargo del estudiante, a través del feedback. </li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos5 }}</td>
+                                <td>{{rubrica.comentario5}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5.</strong> Monitoreo del progreso y potencial de los alumnos
+                                    <li>¿Cómo haces que tus alumnos sepan qué tan bien lo están haciendo respecto de su aprendizaje y de los objetivos de la clase? </li>
+                                    <li>¿Qué decisiones pedagógicas tomas con la evidencia que entrega la evaluación?  </li>
+                                    <li>Explica cómo compartes los métodos de evaluación con los alumnos y sus familias.</li>
+                                    <li>¿Utilizas estrategias de metacognición?, ¿cuáles?</li>
+                                    <li>¿Cómo aportas a la confección de una evaluación diferenciada?</li>
+                                </td>
+                                <td>No utiliza variedad de evaluación y no provee feedback frecuente.</td>
+                                <td>Utiliza escasa variedad de evaluaciones y provee feedback limitado.</td>
+                                <td>Utiliza variedad de evaluaciones para medir el desempeño del alumno y dar feedback, pero no toma decisiones pedagógicas para guiar el aprendizaje a partir de los datos obtenidos. </td>
+                                <td>Crea, selecciona y utiliza efectivamente variedad de evaluaciones que le permiten guiar el proceso de aprendizaje del estudiante, tomando decisiones a partir de los datos para diferenciar y entregar feedback oportuno. </td>
+                                <td>
+                                    <li>Utiliza evaluación diferenciada de acuerdo al diagnóstico del estudiante y a un diseño adecuado, acorde a los objetivos de aprendizaje.</li>
+                                    <li>Utiliza evidencia basada en datos para emplear estrategias de diferenciación.  </li>
+                                    <li>Provee feedback frecuente y oportuno a los alumnos como parte del monitoreo del logro de aprendizajes.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos6 }}</td>
+                                <td>{{rubrica.comentario6}}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>6.</strong> Motivación por pertenecer al Equipo Multidisciplinario
+                                    <li>¿Qué pudiste averiguar del Colegio?</li>
+                                    <li>¿Cómo crees que puedes aportar a nuestro proyecto educativo?</li>
+                                    <li>¿Qué impacto tendría tu incorporación, en los estudiantes que presentan necesidades educativas especiales y en sus apoderados?</li>
+                                    <li>¿Con qué profesionales has participado en otros equipos multidiciplinarios?</li>
+                                </td>
+                                <td>Comunica vagamente sus posibles aportes a la institución y no identifica aspectos claves del PEI.</td>
+                                <td>Comunica alguna fortaleza alineada con las necesidades de la institución y demuestra identificar aspectos generales del PEI. No desarrolla la idea del impacto que puede generar sus intervenciones en el establecimiento.</td>
+                                <td>Comunica fortalezas alineadas con las necesidades de la institución, y demuestra algún nivel de conocimiento de aspectos claves del PEI. Señala vagamente lo que podría aportar a la comunidad.</td>
+                                <td>Identifica fortalezas alineadas con las necesidades de la institución. Expone aspectos claves del PEI, demostrando  conocimiento y alineación con el mismo. Tiene claridad de sus capacidades y el impacto que pueden generar sus intervenciones en la comunidad.</td>
+                                <td>
+                                    <li>Plantea fortalezas relacionadas con la cultura de la Institución: responsabilidad, trabajo en equipo, interés en perfeccionamiento y trabajo en equipo.</li>
+                                    <li>Menciona aspectos claves del PEI del colegio.</li>
+                                    <li>Tiene experiencia en el trabajo con equipos multidisciplinarios y altas expectativas referidas al impaco de su intervención en el establecimiento. </li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos7 }}</td>
+                                <td>{{rubrica.comentario7}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7.</strong> Innovación
+                                    <li>¿Te gusta innovar en la sala de clases, ¿por qué? </li>
+                                    <li>¿Has utilizado prácticas innovadoras en la sala de clases?, ¿por qué?, ¿cómo te han resultado?        </li>
+                                    <li>¿Cuál fue tu rol en esa práctica? </li>
+                                    <li>¿Dónde aprendiste sobre estas prácticas?</li>
+                                    <li>¿Cómo trabajas colaborativamente con tus pares?, ¿tienes experiencias de trabajo con profesores de otros niveles y/o asignaturas?</li>
+
+                                </td>
+                                <td>No tiene experiencia en innovación ni demuestra interés o necesidad de innovar en la sala de clases y el trabajo colaborativo. </td>
+                                <td>No tiene experiencia en innovación y trabajo colaborativo, pero demuestra interés y necesidad de integrarlo a la práctica. </td>
+                                <td>Tiene experiencias aisladas en innovación y trabajo colaborativo, pero no existosas. Manifiesta interés en mejorar.  </td>
+                                <td>Tiene experiencia en prácticas innovadoras y de trabajo colaborativo con sus pares. Es parte fundamental de su práctica. </td>
+                                <td>
+                                    <li>Demuestra una actitud abierta para la innovación en la sala de clases.</li>
+                                    <li>Las prácticas innovadoras que ha implementado, le han dado buenos resultados.</li>
+                                    <li>Demuestra un rol codocente como facilitador del aprendizaje, no como centro de conocimiento.</li>
+                                    <li>Demuestra capacidad de trabajo colaborativo con sus pares. </li>
+                                    <li>Demuestra experiencias de trabajo con profesionales de la educación al interior del aula, beneficiando a los que requieren de apoyo pedagógico.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos8 }}</td>
+                                <td>{{rubrica.comentario8}}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>8.</strong>  Conocimientos generales de educación
+                                </td>
+                                <td>Durante la entrevista, se evidencian errores sustantivos o demuestra falta de conocimientos claves del rol y trabajo de un docente. </td>
+                                <td>Durante la entrevista, demuestra nociones generales sobre su rol como profesional de apoyo o sobre el aprendizaje, pero necesita desarrollarse profesionalmente. </td>
+                                <td>Durante la entrevista, demuestra conocimientos satisfactorios y esperados sobre el contenido, pedagogía y alumnos. </td>
+                                <td>Durante la entrevista, demuestra un conocimiento profundo de alternativas de intervención pedagógica, necesidades educativas especiales, instrumentos evaluativos y formativos, rol del equipo multidisciplinario. </td>
+                                <td>
+                                    <li>Utiliza conocimientos precisos y actualizados sobre educación y metodologías activas.</li>
+                                    <li>Utiliza la gramática correctamente.</li>
+                                    <li>Demuestra un conocimiento del alumno como sujeto de aprendizaje.</li>
+                                    <li>Demuestra manejo de ley de inclusión.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos9 }}</td>
+                                <td>{{rubrica.comentario9}}</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Observaciones Generales</strong></td>
+                                <td colspan="7">{{rubrica.observaciones}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cargo al que postula</strong></td>
+                                <td colspan="7">{{rubrica.cargop}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Niveles en los que realizará clases/trabajará</strong></td>
+                                <td colspan="7">{{rubrica.niveles}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Profesor jefe</strong></td>
+                                <td class="text-center" > {{rubrica.opcion}} </td>
+                            </tr>
+                            <tr>
+                                <td>Comentarios referencias</td>
+                                <td colspan="7">{{rubrica.cometarios_referencias}}</td>
+                            </tr>
+                            <tr>
+                                <td>Remuneración ofrecida</td>
+                                <td colspan="7"> {{rubrica.renumeracion}}</td>
+                            </tr>
+                            <tr>
+                                <td>Horas de contrato ofrecidas</td>
+                                <td class="text-justify" style="white-space:pre-wrap" colspan="7">{{rubrica.horas}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coordinador/a FFEBE que entrevistó</strong></td>
+                                <td colspan="7">{{rubrica.coordinador_entrevisto}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Observaciones Coordinador/a FEBE</strong></td>
+                                <td colspan="7">{{rubrica.observaciones_c}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>PUNTAJE FINAL:</td>
+                                <td style="text-align: center;">{{puntos.suma}}</td>
+                                <td></td>
+
+                            </tr>
+                    </tbody>
+                </table>
+                <div class="text-right">
+
+                    <a href="{% url 'rectores:clasedemo' %}" class="btn btn-info"> Cancelar </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static "js/jquery.plugin.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+    <script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!--Script que suma de manera inmediata-->
+    <script>
+        function sumar() {
+            var total = 0;
+            $(".monto").each(function() {
+
+            if (isNaN(parseFloat($(this).val()))) {
+                total += 0;
+            } else {
+                total += parseFloat($(this).val());
+            }
+        });
+        //alert(total);
+        document.getElementById('spTotal').innerHTML = total;
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+
+<form method="post" >
+    
+            <h3>Se eliminara la postulación de <strong> {{object.nombre}} {{object.apellido_p}} {{object.apellido_m}} </strong>¿Eliminar?</h3>
+            <hr>
+            <div class="panel panel-default" style="align-content: center;">
+              <div class="panel-body">
+                    <div class="row">
+                        {% csrf_token %}
+                    </div>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a href="{% url 'coordinacion:index' %}" class="btn btn-success">Cancelar</a>                    
+                  </div>
+              </div>
+</form>
+
+              <br>
+
+<div id="popup"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 500,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+    
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+{% endblock %}

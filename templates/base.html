@@ -1,0 +1,159 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title %}Postulaciones{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontello-2f186091/css/fontello.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/app.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/animations.css" %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> 
+
+
+
+    
+
+
+  </head>
+  <body style="font-family: 'Work Sans';">
+
+
+    <div class="container-fluid my-4">
+
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-sm-12">
+          <div class="row">
+            <div class="text-right">
+
+      
+            </div>
+          </div>
+          
+          <!--
+          <a href="">
+            <img   src="{% static "img/logo.jpg" %}" height="70px" class=" img-fluid img-thumbnail"  alt="">
+          </a>
+          -->
+          <br>
+          <br>
+          <div class="card mb-3">
+            <div class="card-body">
+              <!--
+              {% for message in messages %}
+
+    
+                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+          
+              {% endfor %}
+-->
+{% for message in messages %}
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <ul class="messages">
+                        <h3 class="{{ message.tags }}">{{ message }}</h3>
+                      </ul>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+              {% block content %}
+
+
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{% static "js/jquery.plugin.min.js" %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+<script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="{% static "js/moment.min.js" %}"></script>
+<script src="{% static "js/datetime-moment.js" %}"></script>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+        $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
+        $('#example').DataTable({
+            
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+
+          }
+          
+        });
+  } );
+</script>
+
+
+
+
+<script type="application/javascript">
+  $(document).ready(function(){
+      $('#exampleModal').modal({show:true});
+  });
+</script>
+
+<script> 
+  $(document).ready(function(){
+    $("#flip").click(function(){
+      $("#panel").slideToggle("slow");
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $('.formset_row-{{ formset.prefix }}').formset({
+      addText: 'Añadir otro colegio',
+      deleteText: 'Remover',
+      prefix: '{{ formset.prefix }}',
+  });
+</script>
+
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+
+<script>
+  $(window).on('load', function() {
+    $('#mdb-preloader').addClass('loaded');
+  });
+</script>
+
+
+</script>
+
+</body>
+</html>

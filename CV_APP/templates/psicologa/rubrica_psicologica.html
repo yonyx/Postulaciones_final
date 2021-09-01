@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <div class="container" style="padding-left: 20%;" >
+        <h3 class="text-center">Rúbrica psicolaboral</h3>
+        <br>
+        <div class="table-responsive">
+
+            <table  class="table-striped "  >
+                <thead>
+                    <tr style=" text-align: center;">
+                        <th width="280" >1. Aspectos Generales</th>
+
+
+                    </tr>
+                </thead>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ formset.management_form|crispy }}
+                    <tbody >
+                        <tr>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <td>Motivación por el cargo</td>
+                                <td>{{formset.aspecto|as_crispy_field}}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td>Grado de adecuación a la entrevista</td>
+                            <td>{{formset.aspecto_2|as_crispy_field}}</td>
+                        </tr>
+                    </tbody>
+                    <br>
+            </table>
+            <br>
+            <table class="table-striped ">
+                <thead>
+                    <tr style=" text-align: center;">
+                        <th style="text-align: center;" >2. Competencias</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+                        <td>Pensamiento analítico</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_1|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Planificación y organización</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_2|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Responsabilidad</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_3|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Compromiso organizacional</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_4|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Disposición al aprendizaje</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_5|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Habilidad de liderazgo</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_6|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Perseverancia</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_7|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Autonomía e iniciativa</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_8|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Adaptación al cambio</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_9|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Motivación por el logro de resultados</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_10|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Orientación a la calidad</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_11|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad de trabajo en equipo</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_12|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad de innovación</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                        {{formset.competencia_13|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Estabilidad emocional</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_14|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad autocrítica</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_15|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tolarancia a la frustración</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_16|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad de trabajo bajo presión</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_17|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apego a normas y principios</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_18|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Comunicación efectiva</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{formset.competencia_19|as_crispy_field}}
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <table class="table-striped ">
+                <thead>
+                    <tr>
+                        <th width="280">3. Conclusión</th>
+                        <th> {{formset.conclusion|as_crispy_field}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+
+                    </tr>
+                </tbody>
+
+            </table>
+            <br>
+            <table  class="table-striped ">
+                <thead>
+                    <tr>
+                        <th width="280" colspan="2">4. Fortalezas y posibilidades de mejora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="300" rowspan="4">Fortalezas</td>
+
+                    </tr>
+                    <tr>
+                        <td width="400" >
+                           {{formset.fortalezas|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{formset.fortalezas2|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{formset.fortalezas3|as_crispy_field}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Posibilidades de mejora</td>
+                    </tr>
+                    <tr>
+                        <td>{{formset.posibilidades|as_crispy_field}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{formset.posibilidades2|as_crispy_field}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{formset.posibilidades3|as_crispy_field}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table class="table-striped " >
+                <tbody>
+                    <tr>
+                        <th width="300" >5. Sugerencias para jefatura</th>
+                        <td>{{formset.sugerencias|as_crispy_field}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="row">
+
+            <div class="col-4">
+                <input class="a"  type="checkbox" name="psicologa" id="psicologa" onclick="disable()">
+                <label class="form-check-label" for="psicologa"> Aprobar psicolaboral  </label>
+            </div>
+            <div class="col-4">
+                <input class="d"  type="checkbox" name="rechazar" id="rechazar" onclick="disabler()">
+                <label class="form-check-label" for="rechazar"> Rechazar psicolaboral </label>
+            </div>
+        </div>
+
+        <br>
+        <div>
+            <button type="submit" class="btn btn-success btn-md">Guardar</button>
+            <a href="{% url 'psicologa:index' %}" class="btn btn-info"> Cancelar </a>
+        </div>
+    </form>
+    </div>
+
+
+<script>
+  function disable() {
+    var elements = document.getElementsByClassName("d");
+    document.getElementById("psicologa").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, psicologa) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = psicologa;
+    }
+  }
+</script>
+
+<script>
+  function disabler() {
+    var elements = document.getElementsByClassName("a");
+    document.getElementById("rechazar").checked ? doIt(elements, true) : doIt(elements, false);
+
+  }
+
+  function doIt(elements, rechazar) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].disabled = rechazar;
+    }
+  }
+</script>
+
+{% endblock %}

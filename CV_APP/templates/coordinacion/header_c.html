@@ -1,0 +1,93 @@
+{% if user.is_authenticated and user.is_coordinacion %}
+{% load static %}
+<!--<link rel="stylesheet" href="{% static "css/menu.css" %}">-->
+<img class="img-thumbnail" src="{% static "img/logo.jpg" %}" alt="" width="200" height="100">
+<div class="text-right">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>  {{ user.first_name }}  {{user.last_name}}<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'user' %}" target="_blank"> <i class="fas fa-user-cog"></i> Información de Usuario</a></li>
+    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+  </ul>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link  " href="{% url 'coordinacion:proceso' %}">Docentes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'coordinacion:coordinadores' %}">Coordinadores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'coordinacion:estado_em' %}">Equipo Multidisciplinario</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="{% url 'coordinacion:index_admin' %}">Administrativos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="">Auxiliares</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'coordinacion:rechazados' %}">No sigue proceso</a>
+  </li>
+</ul>
+
+
+<br>
+
+{% endif %}
+{% if user.is_authenticated and user.is_coordinacion2 %}
+{% load static %}
+<!--<link rel="stylesheet" href="{% static "css/menu.css" %}">-->
+<img class="img-thumbnail" src="{% static "img/logo.jpg" %}" alt="" width="200" height="100">
+<div class="text-right">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>  {{ user.first_name }}  {{user.last_name}}<span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'user' %}" target="_blank"> <i class="fas fa-user-cog"></i> Información de Usuario</a></li>
+    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+  </ul>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link  " href="{% url 'coordinacion:proceso' %}">Docentes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'coordinacion:coordinadores' %}">Coordinadores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'coordinacion:estado_em' %}">Equipo Multidisciplinario</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="{% url 'coordinacion:index_admin' %}">Administrativos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="">Auxiliares</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'coordinacion:rechazados' %}">No sigue proceso</a>
+  </li>
+</ul>
+
+
+<br>
+
+{% endif %}
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link {% if active == 'new' %} active{% endif %}" href="{% url 'coordinacion:coordinadores' %}">Postulantes</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link {% if active == 'new2' %} active{% endif %}" href="{% url 'coordinacion:entrevistar' %}">Estado postulante</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link {% if active == 'new3' %} active{% endif %}" href="{% url 'coordinacion:psicolaboral_c' %}">Liberar Psicolaboral</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if active == 'new6' %} active{% endif %}"" href="{% url 'coordinacion:ficha_fat_c' %}">Aceptar ficha F.A.T</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if active == 'new4' %} active{% endif %}" href="{% url 'coordinacion:fin_c' %}">Finalizados</a>
+  </li>
+</ul>

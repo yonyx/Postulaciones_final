@@ -1,0 +1,29 @@
+{% load static %}
+{% load crispy_forms_tags humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+
+        <span class="mb-3">Estimad(o/a) <strong>{{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}}</strong> </span>
+        <p> hemos finalizado el proceso de selección para el cargo al cual postulaste. En esta oportunidad ha sido seleccionado otro candidato, sin embargo, agradecemos tu tiempo y disposición, sin duda consideraremos tu CV para un futuro.</p>
+<br>
+<br>
+        Saludos cordiales.
+        <br>
+        <br>
+        <strong>{{postulantes.rector.first_name}} {{postulantes.rector.last_name}}</strong>
+        <br>
+        <br>
+
+        <footer>
+            <br>
+            <hr>
+            <a href="https://www.bostoneduca.cl/">
+                <img   src="https://www.bostoneduca.cl/images/logo.jpg?v13" height="70px" class=" img-fluid rounded"  alt="">
+            </a>
+        </footer>
+
+    </body>
+</html>

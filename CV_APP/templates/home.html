@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+<title>{% block title %} Trabaja con nosotros {% endblock %} </title>
+<img class="mb-4 " src="{% static "img/FEBE.png" %}" alt="" width="auto" height="70">
+<img class="mb-4 float-right img-fluid" src="{% static "img/SelloBE_2020.png" %}" alt="" width="80" height="80">
+<center><h2 style="color: #ffbe28;  font-family: Work Sans;"><strong> TRABAJA CON NOSOTROS</strong></h2></center>
+<br>
+<p class="text-center" style="color: #143c96;"> <strong>¡SÉ PARTE DE NUESTRA COMUNIDAD EDUCATIVA!</strong> <br>
+  Te damos la bienvenida al sistema de postulación laboral online de los colegios BostonEduca y <br>
+  con Sello BostonEduca. Al registrarte serás notificado vía mail sobre el estado de tu postulación.</p>
+<br>
+<br>
+<form style=" color: #143c96;" method="POST" id="form" enctype="multipart/form-data" data-titulo-url="{% url 'ajax_load_indi' %}" novalidate>
+
+                    <br>
+                    {% csrf_token %}
+                  <div  style="background-color: #e6e6e6;">
+                    <ul class="nav nav-tabs mb-3" >
+
+                      <li class="nav-item" >
+                        <li class="nav-link " > <strong>Datos personales</strong> </li>
+                      </li>
+                      <br>
+                      <div class="col-12"></div>
+                      <div class="col-12"></div>
+                      <br>
+                          <div class="col-2">
+                          <label for="id_rut" class="col-form-label requiredField" >Rut<span class="asteriskField">*</span></label>
+                          <input class="form-control" type="text" id="rut" name="rut" required="id_rut" oninput="checkRut(this)" onkeypress="return isNumber(event)" placeholder="Ingrese RUT">
+                          </div>
+                          <div id="alerta" class="alert  alert-dismissible fade show text-center col-12 " role="alert">
+                            <span id="mensaje"></span>
+                          </div>
+                          <br>
+                          <div class="col-4"> {{form.nombre|as_crispy_field}} </div>
+                          <div class="col-4">{{form.apellido_p|as_crispy_field}}</div>
+                          <div class="col-4">{{form.apellido_m|as_crispy_field}}</div>
+                    </ul>
+                  </div>
+                  <div style="background-color: #e6e6e6;">
+                    <ul class="nav nav-tabs mb-3" >
+                      <li class="nav-item" >
+                        <li class="nav-link" > <strong>Datos de contacto</strong> </li>
+                      </li>
+                      <div class="col-12"></div>
+                      <div class="col-12"></div>
+                      <br>
+
+                      <div class="col-4">{{form.telefono|as_crispy_field}}</div>
+                      <div class="col-4">{{form.email|as_crispy_field}}</div>
+                      <div class="col-4"></div>
+                    </ul>
+                  </div>
+                  <div style="background-color: #e6e6e6;">
+
+                    <ul class="nav nav-tabs mb-3">
+
+                        <li class="nav-item">
+                          <li class="nav-link"> <strong>Datos postulante</strong></li>
+                        </li>
+                        <div class="col-12"></div>
+                          <br>
+                          <br>
+                        <div class="col-12"></div>
+                        <div class="col-4" >{{form.cargo|as_crispy_field}}</div>
+                        <div class="col-4">{{form.titulo|as_crispy_field}}</div>
+                        <div class="col-4" >{{form.años|as_crispy_field}}</div>
+                        <div class="col-12"></div>
+
+                        <br>
+                        <div class="col-4" >{{form.colegio1|as_crispy_field}}</div>
+                        <div class="col-4" >{{form.colegio2|as_crispy_field}}</div>
+                        <div class="col-4" >{{form.colegio3|as_crispy_field}}</div>
+
+                        <div class="col-4" >{{ form.disponibilidad|as_crispy_field }}</div>
+                        <div class="col-4">{{form.nivel_ingles|as_crispy_field}}</div>
+                        <div class="col-4">{{form.nivel_tec|as_crispy_field}}</div>
+                        <div class="col-4" >{{form.cv|as_crispy_field}}</div>
+                        <div class="col-4">{{form.otros_documentos|as_crispy_field}}</div>
+                        <p class="text-muted">&nbsp; <i class="far fa-question-circle"></i> Puedes ingresar en otros documentos algún archivo extra para complementar tu currículum.</p>
+
+                  </div>
+                    </ul>
+                  <div style="background-color: #e6e6e6;">
+                    <ul class="nav nav-tabs mb-3">
+
+                        <li class="nav-item">
+                          <li class="nav-link " > <strong>Referencia laboral</strong></li>
+                        </li>
+
+                        <div class="container" >
+                            <p class="text-muted">*Agregar dos referencias laborales, una de supervisor o jefe y la otra de alguien con quien trabajó.</p>
+                            <br>
+                            <div class="row">
+                            <div class="col-sm-6">
+                              <div class="col-6">{{form.nombre_r|as_crispy_field}}</div>
+                              <div class="col-6">{{form.cargo_r|as_crispy_field}}</div>
+                              <div class="col-6">{{form.instituto_r|as_crispy_field}}</div>
+                              <div class="col-6">{{form.corre_r|as_crispy_field}}</div>
+                              <div class="col-6">{{form.telefono_r|as_crispy_field}}</div>
+                              <div class="col-6">{{form.relacion_r|as_crispy_field}}</div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="col-6">{{form.nombre_r_2|as_crispy_field}}</div>
+                              <div class="col-6">{{form.cargo_r_2|as_crispy_field}}</div>
+                              <div class="col-6">{{form.instituto_r_2|as_crispy_field}}</div>
+                              <div class="col-6">{{form.corre_r_2|as_crispy_field}}</div>
+                              <div class="col-6">{{form.telefono_r_2|as_crispy_field}}</div>
+                              <div class="col-6">{{form.relacion_r_2|as_crispy_field}}</div>
+                            </div>
+                          </div>
+                        </div>
+
+                      <br>
+
+                    </ul>
+                  </div>
+                    <button id="submit" type="submit" class="btn btn-md" style="background-color: #143c96; color: white;">Postular</button>
+
+
+                    <br>
+              </form>
+
+
+
+
+              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-info-circle"></i> Postulación enviada</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Gracias por tu interés. Revisaremos tus antecedentes y nos pondremos en contacto a la brevedad si tu perfil se ajusta al cargo que estamos buscando.
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+<script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script src="{% static "js/jquery.plugin.min.js" %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.rut.js' %}"></script>
+<script src='https://www.google.com/recaptcha/api.js?render=6Lc5qMIZAAAAAL0cIu9fGIAsngG3S-0ZJI5DBWuX'></script>
+<script type="text/javascript" src="{% static 'js/comunas.js' %}"></script>
+<script src="{% static "js/validarRUT.js" %}"></script>
+
+
+<script>
+  $("#id_cargo").change(function () {
+    var url = $("#form").attr("data-titulo-url");
+    var cargoId = $(this).val();
+
+    $.ajax({
+      url: url,
+      data: {
+        'cargo': cargoId
+      },
+      success: function (data) {
+        $("#id_titulo").html(data);
+      }
+    });
+
+  });
+</script>
+
+
+<script>
+  /*global grecaptcha*/
+  grecaptcha.ready(function() {
+      grecaptcha.execute('6Lc5qMIZAAAAAL0cIu9fGIAsngG3S-0ZJI5DBWuX', {action: "/contact/"}).then(function(token) {
+        document.getElementById('g-recaptcha-response').value = token;
+      });
+  });
+</script>
+<!--
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#exampleModal2").modal('show');
+  });
+</script>
+-->
+<script>
+  $(document).ready(function(){
+    $("#flip").click(function(){
+      $("#panel").slideToggle("slow");
+    });
+  });
+</script>
+<script type="text/javascript">
+  $('.formset_row-{{ formset.prefix }}').formset({
+      addText: 'Añadir otro colegio',
+      deleteText: 'Remover',
+      prefix: '{{ formset.prefix }}',
+  });
+</script>
+
+<script>
+    $(document).ready(function() {
+    $('#submit').click(function() {
+      var value = document.getElementById('rut').value;
+      if (value === '') {
+        alert('Ingrese su RUT');
+      }
+    })
+  });
+</script>
+
+{% endblock %}

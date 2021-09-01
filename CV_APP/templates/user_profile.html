@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+{% if user.is_authenticated and user.is_coordinacion %}
+
+<h1><i class="far fa-user"></i> Perfil de usuario</h1>
+<p class="text-right text-muted">Unido el {{user.date_joined|date:' d/m/Y'}} a las {{user.date_joined|date:'H:i:s'}}</p>
+<br>
+<a href="">Editar perfil <i class="fas fa-edit"></i></a>
+<br>
+<p><strong>NOMBRE:</strong> {{ user.first_name }}  {{user.last_name}} </p>
+<p><strong>CORREO:</strong> {{user.email}} </p>
+<p><strong>COLEGIO:</strong> CASA CENTRAL</p>
+<br>
+{% endif %}
+
+{% if user.is_authenticated and user.is_rector %}
+<p class="text-right text-muted">Unido el {{user.date_joined|date:' d/m/Y'}} a las {{user.date_joined|date:'H:i:s'}}</p>
+<div>
+{% for colegio in user.rector.colegio.all %}
+<img src=" {{ colegio.imagen.url }} " class="img-fluid" style="width: 18%;"/>
+{% endfor %}
+</div>
+<br>
+<h1><i class="far fa-user"></i> Perfil de usuario</h1>
+<br>
+<br>
+<p><strong>NOMBRE:</strong> {{ user.first_name }}  {{user.last_name}} </p>
+<p><strong>CORREO:</strong> {{user.email}} </p>
+<p><strong>COLEGIO:</strong> {% for colegio in user.rector.colegio.all%}  {{colegio.name}} {% endfor %}
+
+
+{% endif %}
+
+{% if user.is_authenticated and user.is_psicologa %}
+<p class="text-right text-muted">Unido el {{user.date_joined|date:' d/m/Y'}} a las {{user.date_joined|date:'H:i:s'}}</p>
+<div>
+
+</div>
+<br>
+<h1><i class="far fa-user"></i> Perfil de usuario</h1>
+<br>
+<br>
+<p><strong>NOMBRE:</strong> {{ user.first_name }}  {{user.last_name}} </p>
+<p><strong>CORREO:</strong> {{user.email}} </p>
+<p><strong>COLEGIO:</strong> {% for colegio in user.psicologa.colegio.all%} <li> {{colegio.name}}</li> {% endfor %}
+
+
+{% endif %}
+
+
+
+
+{% endblock %}

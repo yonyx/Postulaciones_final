@@ -1,0 +1,377 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontello-2f186091/css/fontello.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/animations.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/rubrica.css" %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <title>Rúbrica</title>
+</head>
+<body>
+    <br>
+
+    <div class="container-responsive">
+        <br>
+
+            <h3 class="text-center">Rúbrica Docente</h3>
+        <br>
+        <p> <strong> Postulante:</strong> {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}} </p>
+        <p> <strong> Cargo al que postula:</strong> {{postulantes.cargo}}</p>
+        <br>
+        <br>
+        <div class="table-responsive">
+            <br>
+                <table  class=" table table-striped table-bordered table-sm  display " >
+                    <thead>
+                        <tr>
+                            <th style="vertical-align: text-top; text-align: center;">Dimensiones y preguntas tipo</th>
+                            <th class="text-center">Insatisfactorio <hr> 0 pt. </th>
+                            <th class="text-center">En desarrollo <hr> 1 pt. </th>
+                            <th class="text-center">Adecuado <hr>2 pts. </th>
+                            <th class="text-center">Superior <hr>3 pts. </th>
+
+                            <th style="vertical-align: text-top; text-align: center;">Indicadores esperados</th>
+                            <th style="vertical-align: text-top; text-align: center;">Puntaje por dimensión</th>
+                            <th style="vertical-align: text-top; text-align: center;">Observaciones que fundamenten el puntaje</th>
+                        </tr>
+                    </thead>
+                    <form method="post" enctype="multipart/form-data">
+
+                        <tbody>
+
+                            {% csrf_token %}
+                            {{ formset.management_form|crispy }}
+
+                            <tr>
+                                <td>
+                                    <strong>1.</strong> Docente como persona:
+                                    <li>Con todos los desafíos de esta profesión, ¿por qué elegiste enseñar y ser docente?</li>
+                                    <li>¿Cuáles son tus fortalezas y debilidades como profesor?</li>
+                                </td>
+                                <td>No comunica claramente su vocación ni provee ejemplos concretos.
+                                    Describe vagamente sus fortalezas.</td>
+                                <td>Comunica claramente una idea general, pero la respuesta carece de especificidad.
+                                    Describe algunas fortalezas. </td>
+                                <td>Comunica con claridad y da algunos ejemplos (concretos y abstractos).
+                                    Identifica fortalezas y debilidades en forma general, ejemplificando algunas de ellas. </td>
+                                <td>Comunica efectiva y detalladamente aspectos de su pasión y dedicación a la profesión, utilizando ejemplos.
+                                    Identifica claramente fortalezas y debilidades, dando ejemplos específicos. </td>
+                                <td>
+                                    <li>Demuestra entusiasmo por la enseñanza.</li>
+                                    <li>Interactúa con los estudiantes.</li>
+                                    <li>Posee un alto nivel de motivación.</li>
+
+                                </td>
+                                <td>
+                                    <label for="puntos" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos" name="puntos" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2.</strong> Planificar para el Aprendizaje:
+                                    <hr>
+                                <strong>2A.</strong>
+                                    <li>¿Crees que es importante planificar?, ¿por qué?     </li>
+                                    <li>¿Qué criterios usas para ello?</li>
+                                    <li>Piensa en una clase que hayas dictado recientemente y describe cómo la planificaste. </li>
+                                </td>
+                                <td>No realiza planes de largo plazo con el fin de maximizar el tiempo de enseñanza durante el año. </td>
+                                <td>Realiza planificación de largo y corto plazo, pero las contempla como unidades aisladas.</td>
+                                <td>Se enfoca en la distribución correcta del tiempo, con el fin de alcanzar todos los objetivos anuales y consolidar conocimientos aislados a través de conceptos más amplios.</td>
+                                <td>Prioriza la enseñanza alineando los planes de corto plazo con los de largo plazo, para relacionar contenidos y conceptos previos y futuros.</td>
+                                <td>
+                                    <li>Secuencia el contenido a enseñar.</li>
+                                    <li>Relaciona conceptos con conocimientos previos.</li>
+                                    <li>Selecciona los objetivos de la clase y alinea las actividades a los mismos.</li>
+                                </td>
+                                <td>
+                                    <label for="puntos2" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos2" name="puntos2" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario2|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2B.</strong>
+                                    <li>¿Cuál consideras como un tema o contenido complejo para los estudiantes de tu disciplina/nivel?</li>
+                                    <li>¿Qué estrategias has usado/usarías para que todos puedan aprender?</li>
+                                </td>
+                                <td>Desconoce conceptos claves de la disciplina o nivel. Muestra manejo no específico de estrategias didácticas. </td>
+                                <td>Tiene conocimientos básico de la disciplina o nivel. Utiliza estrategias poco profundas para la disciplina o nivel.  </td>
+                                <td>Demuestra conocimiento de su disciplina, pero no actualización. Utiliza estrategias poco innovadoras para abordar la disciplina o nivel.  </td>
+                                <td>Posee un conocimiento actualizado y profundo de su disciplina o nivel. Utiliza estrategias innovadoras para distintos momentos didácticos.  </td>
+                                <td>
+                                    <li>Domina en profundidad los conceptos básicos de su disciplina/nivel. </li>
+                                    <li>Conoce la didáctica de su disciplina/nivel. </li>
+                                </td>
+                                <td>
+                                    <label for="puntos3" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos3" name="puntos3" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario3|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>3.</strong> Gestión del clima de aprendizaje:
+                                    <hr>
+                                <strong>3A.</strong>
+                                    <li>¿Qué variables del clima de clase consideras importantes para el aprendizaje?, ¿cómo los intencionas?</li>
+                                    <li>Cuéntame una situación en la que hayas tenido dificultad con la conducta de un estudiante y lo que hiciste para abordar la situación.  </li>
+                                </td>
+                                <td>No comunica claramente las variables de clima de aula. Su reacción inicial es castigar.</td>
+                                <td>Comunica las variables de clima de aula en forma inconsistente y su reacción es de tipo reactiva. Se enfoca en la uniformidad de la conducta de sus estudiantes.</td>
+                                <td>Comunica claramente las variables de clima de aula y fija normas de convivencia con sus estudiantes. </td>
+                                <td>Comunica claramente las variables de clima de aula y ayuda a los estudiantes a lograrlas de una manera positiva y constructiva.</td>
+                                <td>
+                                    <li>Comunica las variables de clima de aula, tales como: respeto, buen trato, colaboración, espacios de participación de los estudiantes, etc. </li>
+                                    <li>Monitorea las variables y provee feedback.</li>
+                                    <li>Involucra a los apoderados y estudiantes para diseñar soluciones adecuadas.</li>
+                                </td>
+                                <td>
+                                    <label for="puntos4" class="col-form-label requiredField" >Puntos<span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos4" name="puntos4" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario4|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3B.</strong>
+                                    <li>Describe cómo promueves altas expectativas de logro en los estudiantes durante la clase. Dame un ejemplo de una clase en la que hayas desafiado académicamente a tus estudiantes.</li>
+                                </td>
+                                <td>Coloca la responsabilidad del logro académico sólo en el estudiante.</td>
+                                <td>Promueve la participación de los estudientes en su propio aprendizaje y asume la responsabilidad primaria del  aprendizaje de estos.</td>
+                                <td>Promueve el entusiasmo por aprender y alienta  a los estudiantes a ser participantes activos en el proceso de aprendizaje.</td>
+                                <td>Comunica una alta estima de sus estudiantes y altas expectativas, dando ejemplos de cómo se ven en la práctica para abordar sus diferentes necesidades.</td>
+                                <td>
+                                    <li>Establece altas expectativas individuales.</li>
+                                    <li>Provee de estrategias a los estudiantes para el logro de los objetivos o metas.</li>
+                                    <li>Enfatiza la responsabilidad del estudiante.</li>
+                                </td>
+                                <td>
+                                    <label for="puntos5" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos5" name="puntos5" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario5|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4.</strong> Implementación de la Enseñanza
+                                    <li>Relata cómo adecúas las necesidades de aprendizaje de tus estudiantes en la sala.</li>
+                                    <li>Dime cómo y cuándo decides diferenciar las estrategias de enseñanza en una clase.</li>
+                                </td>
+                                <td>No realiza modificaciones en su práctica de enseñanza.</td>
+                                <td>Se apoya en otras fuentes (profesores especialista o textos) para modificar las actividades.</td>
+                                <td>Diferencia la enseñanza y el trabajo para algunos estudiantes, de acuerdo a necesidades específicas.</td>
+                                <td>Diferencia para estudiantes específicos, tomando en cuenta distintas variables. Por ejemplo:  estudiantes aventajados y con dificultades.</td>
+                                <td>
+                                    <li>Compromete a los estudiantes con su aprendizaje.</li>
+                                    <li>Considera las necesidades y características de sus estudiantes.</li>
+                                    <li>Provee trabajo diferenciado en forma apropiada.</li>
+                                </td>
+                                <td>
+                                    <label for="puntos6" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos6" name="puntos6" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario6|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>5.</strong> Monitoreo del progreso y potencial de los alumnos
+                                    <li>¿Cómo haces que tus alumnos sepan qué tan bien lo están haciendo respecto de su aprendizaje y de los objetivos de la clase?</li>
+                                    <li>Explica cómo compartes los métodos de evaluación con los alumnos y sus familias.</li>
+                                    <li>¿Utilizas estrategias de metacognición?, ¿cuáles?</li>
+                                </td>
+                                <td>No utiliza variedad de evaluación formativa y sumativa y no provee feedback frecuente.</td>
+                                <td>Utiliza una variedad limitada de evaluaciones formativas y sumativas, y provee feedback limitado.</td>
+                                <td>Provee una variedad de evaluaciones formativas y sumativas para medir el desempeño del estudiante y realiza  feedback durante el proceso.</td>
+                                <td>Crea, selecciona y utiliza efectivamente una variedad de evaluaciones formativas y sumativas para calificar. Regularmente interpreta y comunica a los estudiantes aspectos de mejora y feedback constructivo. </td>
+                                <td>
+                                    <li>Provee feedback frecuente y oportuno a los estudiantes.</li>
+                                    <li>Ofrece oportunidades de evaluación formal e informal.</li>
+                                    <li>Utiliza diferente estrategias/ instrumentos de evaluación.</li>
+                                    <li>Promueve la metacognición.</li>
+                                </td>
+                                <td>
+                                    <label for="puntos7" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos7" name="puntos7" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario7|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6.</strong> Motivación por pertenecer al Equipo Docente
+                                    <li>¿Qué pudiste averiguar del Colegio?</li>
+                                    <li>¿Cómo crees que puedes aportar a nuestro Proyecto Educativo (PEI)?</li>
+                                </td>
+                                <td>Comunica vagamente sus posibles aportes a la institución y no identifica aspectos claves del PEI.</td>
+                                <td>Comunica alguna fortaleza alineada con las necesidades de la institución e  identifica aspectos generales del PEI.</td>
+                                <td>Comunica fortalezas alineadas con las necesidades de la institución, y demuestra algún nivel de conocimiento de aspectos claves del PEI. </td>
+                                <td>Identifica fortalezas alineadas con las necesidades de la institución. Expone aspectos claves del PEI, demostrando un conocimiento y alineación con el mismo.</td>
+                                <td>
+                                    <li> Plantea fortalezas relacionadas con la cultura de la Institución: responsabilidad, trabajo en equipo, interés en perfeccionamiento y nuevos desafíos.</li>
+                                    <li>Menciona aspectos claves del PEI del colegio.</li>
+                                </td>
+                                <td>
+                                    <label for="puntos8" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos8" name="puntos8" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario8|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>7.</strong>  Innovación
+                                    <li>¿Te gusta innovar en la sala de clases, ¿por qué?</li>
+                                    <li>¿Cuáles prácticas innovadoras has realizado en la sala de clases?, ¿por qué?, ¿cómo te han resultado?</li>
+                                    <li>¿Cuál fue tu rol docente es esa práctica?, ¿dónde aprendiste sobre estas prácticas?</li>
+                                    <li>¿Cómo trabajas colaborativamente con tus pares?, ¿tienes experiencias de trabajo con profesores de otros niveles y/o asignaturas?</li>
+                                </td>
+                                <td>No tiene experiencia en innovación ni demuestra interés o necesidad de innovar en la sala de clases y el trabajo colaborativo. </td>
+                                <td>No tiene experiencia en innovación y trabajo colaborativo, pero demuestra interés y necesidad de integrarlo a la práctica.  </td>
+                                <td>Tiene experiencias aisladas en innovación y trabajo colaborativo, pero no existosas. Manifiesta interés en mejorar.  </td>
+                                <td>Tiene experiencia en prácticas innovadoras y de trabajo colaborativo con sus pares. Es parte fundamental de su práctica.  </td>
+                                <td>
+                                    <li>Demuestra una actitud abierta para la innovación en la sala de clases.</li>
+                                    <li>Las prácticas innovadoras que ha implementado, le han dado buenos resultados.</li>
+                                    <li>Demuestra un rol docente como facilitador del aprendizaje, no como centro del conocimiento.</li>
+                                    <li>Demuestra capacidad de trabajo colaborativo con sus pares. </li>
+                                </td>
+                                <td>
+                                    <label for="puntos9" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos9" name="puntos9" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario9|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>8.</strong>  Conocimientos generales de educación</td>
+                                <td>Durante la entrevista, se evidencian errores sustantivos o demuestra falta de conocimientos claves del rol y trabajo de un docente.</td>
+                                <td>Durante la entrevista, demuestra nociones generales sobre su rol como profesor o sobre el aprendizaje, pero necesita desarrollarse profesionalmente.</td>
+                                <td>Durante la entrevista, demuestra conocimientos satisfactorios y esperados sobre el contenido, pedagogía y estudiantes.</td>
+                                <td>Durante la entrevista, demuestra un conocimiento profundo de los contenidos, pedagogía y estudiantes.</td>
+                                <td>
+                                    <li>Utiliza conocimientos precisos y actualizados sobre educación y metodologías activas. </li>
+                                    <li>Utiliza la gramática correctamente.</li>
+                                    <li>Demuestra un conocimiento del estudiante como sujeto de aprendizaje.
+                                    </li>
+                                </td>
+                                <td>
+                                    <label for="puntos10" class="col-form-label requiredField" >Puntos <span class="asteriskField" >*</span></label>
+                                    <input type="number" id="puntos10" name="puntos10" class="monto form-control" required min="0" max="3" onkeyup="sumar();" ></td>
+                                <td>{{formset.comentario10|as_crispy_field }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Observaciones Generales</strong></td>
+                                <td colspan="7">{{formset.observaciones|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cargo al que postula *</strong></td>
+                                <td colspan="7">{{formset.cargop|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Niveles en los que realizará clases/trabajará *</strong></td>
+                                <td colspan="7">{{formset.niveles|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Profesor jefe *</strong></td>
+                                <td >{{formset.opcion|as_crispy_field}}</td>
+
+                            </tr>
+                            <tr>
+                                <td><strong>Nombre referencia y cargo actual *</strong></td>
+                                <td colspan="7">{{formset.Nombre_referencia_y_cargo_actual|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Relación laboral con postulante *</strong></td>
+                                <td colspan="7">{{formset.Relación_laboral_con_postulante|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Comentarios referencias *</strong></td>
+                                <td colspan="7">{{formset.cometarios_referencias|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Remuneración ofrecida *</strong></td>
+                                <td colspan="7"> {{formset.renumeracion|as_crispy_field}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Horas de contrato ofrecidas *</strong></td>
+                                <td colspan="7">{{formset.horas|as_crispy_field}}</td>
+                            </tr>
+<!--                                            -->
+                            <tr>
+                                <td class="checkbox mb-3">
+
+                                    <label>
+                                        <input type="checkbox" id="reemplazo" name="reemplazo" value="reemplazo"> Reemplazo
+                                    </label>
+                                    
+                                </td>
+                                <td id="dvPassport" style="display: none;" class=" col-4">
+                                    {{form.Días|as_crispy_field}}
+                                </td>
+                                <td id="AddPassport">
+
+                                </td>
+                            </tr>
+<!--                                                -->
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>PUNTAJE FINAL:</td>
+                                <td style="text-align: center;"><span id="spTotal"></span></td>
+                                <td></td>
+
+                            </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-success btn-md">Guardar</button>
+                    <a href="{% url 'rectores:entrevistas' %}" class="btn btn-info"> Cancelar </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static "js/jquery.plugin.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+    <script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!--Script que suma de manera inmediata-->
+    <script>
+        function sumar() {
+            var total = 0;
+            $(".monto").each(function() {
+
+            if (isNaN(parseFloat($(this).val()))) {
+                total += 0;
+            } else {
+                total += parseFloat($(this).val());
+            }
+        });
+        //alert(total);
+        document.getElementById('spTotal').innerHTML = total;
+
+        }
+    </script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#reemplazo").click(function () {
+            if ($(this).is(":checked")) {
+                $("#dvPassport").show();
+                $("#AddPassport").hide();
+            } else {
+                $("#dvPassport").hide();
+                $("#AddPassport").show();
+            }
+        });
+    });
+</script>
+</body>
+</html>

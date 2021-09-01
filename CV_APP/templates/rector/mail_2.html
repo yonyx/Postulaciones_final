@@ -1,0 +1,31 @@
+{% load static %}
+{% load crispy_forms_tags humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <p></p>
+        <p> Adjunto Ficha Fat de postulante, el cual ha pasado todos los filtros de selección y ha aceptado la oferta laboral.</p>
+        <p><strong> Postulante:  {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}}</strong> </p>
+        <p><strong> Cargo: {{postulantes.cargo}}</strong> </p>
+        <p> <strong>Rector: {{postulantes.rector.first_name}} {{postulantes.rector.last_name}} </strong> </p>
+
+        Saludos.
+        <br>
+        <br>
+        <a href="https://postulacionboston.fundacionbostoneduca.cl{{postulantes.ficha_fat.url}}" target="_blank"><i class="fas fa-file-download"></i>Ficha F.A.T</a>
+
+        <br>
+
+
+        <footer>
+            <br>
+            <hr>
+            <a href="https://www.bostoneduca.cl/">
+                <img   src="https://www.bostoneduca.cl/images/logo.jpg?v13" height="70px" class=" img-fluid rounded"  alt="">
+            </a>
+        </footer>
+
+    </body>
+</html>

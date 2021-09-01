@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<br>
+<h1 class="text-center">Reportar Rechazado</h1>
+<p>Postulante: {{postulantes.nombre}} {{postulantes.apellido_p}} {{postulantes.apellido_m}} </p>
+<p>Colegio: {{postulantes.colegio1}}</p>
+<p>Correo: {{postulantes.email}} </p>
+
+<br>
+<div class="text-center">
+
+</div>
+
+<div id="popup"></div>
+
+<form method="post" enctype="multipart/form-data">
+
+   
+        
+        {% csrf_token %}
+        {{ formset.management_form|crispy }}
+
+
+        <button type="submit" class="btn btn-success btn-md">Enviar notificación</button> 
+
+</form>
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+    
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+{% endblock %}

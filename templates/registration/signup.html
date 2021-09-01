@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<a href="/"><i class="fas fa-arrow-left"></i> Volver</a>
+<br>
+<br>
+<a href="{% url 'home' %}">
+  <img    src="{% static "img/logo.jpg" %}" height="70px" class=" img-fluid rounded mx-auto d-block" style="align-content: center;"  alt="">
+
+
+</a>
+  <p class="lead text-center">Seleccion el tipo de Usuario que quieres crear</p>
+  <div class="container text-center">
+      <a href="" role="button"></a>
+      <a href="" role="button"></a>
+      <a href="" role="button"></a>
+
+    </div>
+  
+
+{% endblock %}

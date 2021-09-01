@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<br>
+<h1 class="text-center">Rúbricas</h1>
+<p>Postulante: {{postulacion.nombre}} {{postulacion.apellido_p}} {{postulacion.apellido_m}} </p>
+<p>Colegio: {{postulacion.colegio1}}</p>
+
+<br>
+
+<div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          Coordinador/a FFEBE que entrevistó:
+        </div>
+        <div class="card-body">
+          <p class="card-text text-center">{{postulacion.coordinador_entrevisto}}</p>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-sm-6">
+      <div class="card " >
+        <div class="card-header">
+          Observaciones Coordinador/a FEBE:
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{postulacion.observaciones_c}}</p>
+        </div>
+      </div>
+  
+    </div>
+</div>
+ <br>
+<div class="container">
+    <div class="row">
+
+        {% for postulante in postulantes %}
+
+        <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">Rúbrica entrevista rector</h5>
+            <p class="card-text">Publicación: {{postulante.realizada|date:"d/m/Y"}}</p>
+
+            <a href="{% url 'coordinacion:vista_rubrica' postulante.pk %}" class="btn btn-primary btn-lg">Ver </a>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+
+        {% for postulante_c in postulante_c %}
+
+        <div class="col-sm-4">
+        <div class="card" style="width: 18rem;"> 
+            <div class="card-body">
+            <h5 class="card-title">Ver rúbrica coordinador</h5>
+            <p class="card-text">Publicación: {{postulante_c.realizada|date:"d/m/Y"}}</p>
+            <a href="{% url 'coordinacion:vista_rubrica_coordinador' postulante_c.pk %}" class="btn btn-primary btn-lg"> Ver </a>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+
+        {% for postulante_em in postulante_em %}
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;"> 
+            <div class="card-body">
+                <h5 class="card-title">Rúbrica equipo multidiciplinario</h5>
+                <p class="card-text">Publicación: {{postulante_em.realizada|date:"d/m/Y"}}</p>
+                <a href="{% url 'coordinacion:vista_rubrica_equipo' postulante_em.pk %}" class="btn btn-primary btn-lg"> Ver </a>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for postulante_demo in postulante_demo %}
+        
+        <div class="col-sm-4">
+
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Rúbrica clase demostrativa</h5>
+                <p class="card-text">Publicación: {{postulante_demo.realizada|date:"d/m/Y"}}</p>
+                <a href="{% url 'coordinacion:vista_rubrica_demo' postulante_demo.pk %}" class="btn btn-primary btn-lg"> Ver</a>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% for postulante_psicologa in postulante_psicologa %}
+        
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;"> 
+            <div class="card-body">
+                <h5 class="card-title">Rúbrica psicóloga</h5>
+                <p class="card-text">Publicación: {{postulante_psicologa.realizada|date:"d/m/Y"}}</p>
+                <a href="{% url 'coordinacion:vista_rubrica_psicologa' postulante_psicologa.pk %}" class="btn btn-primary btn-lg"> Ver </a>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if postulacion.carta_oferta %}
+
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;"> 
+                <div class="card-body">
+                <h5 class="card-title">Carta oferta</h5>
+                <p class="card-text">Pubicación: {{postulacion.fecha_oferta|date:"d/m/Y"}}</p>
+                <a href="{{postulacion.carta_oferta.url}}" target="_blank" class="btn btn-primary btn-lg"><i class="fas fa-file-download"></i> Descargar </a>
+                </div>
+            </div>
+        </div>
+      {% endif %}
+
+        {% if postulacion.ficha_fat %}
+
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;"> 
+                <div class="card-body">
+                <h5 class="card-title">Ficha FAT</h5>
+                <p class="card-text">Pubicación: {{postulacion.fecha_fat|date:"d/m/Y"}}</p>
+                <a href="{{postulacion.ficha_fat.url}}" target="_blank" class="btn btn-primary btn-lg"><i class="fas fa-file-download"></i> Descargar </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+<div id="popup"></div>
+
+
+<script>
+    var modal;
+    function abrir_modal(url, titulo)
+    {
+        modal = $('#popup').dialog(
+        {
+            title: titulo,
+            modal: true,
+            width: 900,
+            resizable: false
+        }).dialog('open').load(url)
+    }
+
+    function cerrar_modal()
+    {
+        modal.dialog("close");
+    }
+</script>
+
+{% endblock %}

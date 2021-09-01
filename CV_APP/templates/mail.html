@@ -1,0 +1,27 @@
+{% load static %}
+{% load crispy_forms_tags humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <p> ¡Felicidades! Has completado exitosamente el formulario de postulación laboral online. Pronto serás notificado si cumples con el perfil que estamos buscando y si existen vacantes al cargo que postulaste.</p>
+<br>
+<br>    
+        Saludos cordiales.
+        <br>
+        <br>    
+        <strong>{{postulante.rector.first_name}} {{postulante.rector.last_name}}</strong>
+        <br>
+        <br>
+
+        <footer>
+            <br>
+            <hr>
+            <a href="https://www.bostoneduca.cl/">
+                <img   src="https://www.bostoneduca.cl/images/logo.jpg?v13" height="70px" class=" img-fluid rounded"  alt="">
+            </a>
+        </footer>
+       
+    </body>
+</html>

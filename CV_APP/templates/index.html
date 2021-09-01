@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/formulario copy.css' %}">
+
+<center> <img class="mb-4 img-thumbnail" src="{% static "img/logo.jpg" %}" alt="" width="200" height="100"></center>
+
+
+  <h2 class="text-center">Sistema de Postulaciones</h2>
+  
+
+  <hr>
+  <p>
+    <div class="text-center">  
+      <a href="{% url 'login' %}" class="btn btn-primary" role="button">Ingresar</a>
+    </div>
+  </p>
+  <footer class=" text-center text-muted">Fundación Educacional Boston Educa</footer>
+  <p class=" text-center text-muted">&copy; 2020</p>
+
+{% endblock %}

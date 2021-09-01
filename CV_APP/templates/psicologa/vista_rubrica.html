@@ -1,0 +1,274 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontello-2f186091/css/fontello.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/animations.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/rubrica.css" %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <title>Rubrica</title>
+</head>
+<body style="background-color: rgba(203, 203, 224, 0.911);">
+    <br>
+
+    <div class="container-responsive">
+        <br>
+
+            <h3 class="text-center">Rúbrica</h3>
+        <br>
+        <p> <strong> Postulante:</strong> {{rubrica.postulacion.nombre}} {{rubrica.postulacion.apellido_p}} {{rubrica.postulacion.apellido_m}} </p>
+        <p> <strong> Cargo al que postula:</strong> {{rubrica.postulacion.cargo}}</p>
+        <p><strong>Puntos totales:</strong> {{puntos.suma}} </p>
+        <br>
+        <br>
+
+
+        <div class="table-responsive" style="background-color: white;">
+                <table  class=" table table-striped table-bordered table-sm  display " >
+                    <thead>
+                        <tr>
+                            <th style="vertical-align: text-top; text-align: center;">Dimensiones y preguntas tipo</th>
+                            <th class="text-center">Insatisfactorio <hr> 0 pt. </th>
+                            <th class="text-center">En desarrollo <hr> 1 pt. </th>
+                            <th class="text-center">Adecuado <hr>2 pts. </th>
+                            <th class="text-center">Superior <hr>3 pts. </th>
+
+                            <th style="vertical-align: text-top; text-align: center;">Indicadores esperados</th>
+                            <th style="vertical-align: text-top; text-align: center;">Puntaje por dimension</th>
+                            <th style="vertical-align: text-top; text-align: center;">Observaciones que fundamenten el puntaje</th>
+                        </tr>
+                    </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>1.</strong> Docente como persona:
+                                    ¿Por qué elegiste ser docente?,
+                                    con todos los desafíos de la profesión docente, ¿por qué elegiste enseñar?, ¿cuáles son tus fortalezas y debilidades como profesor?
+                                </td>
+                                <td>No comunica claramente su vocación ni provee ejemplos concretos. <hr> Describe vagamente sus fortalezas.</td>
+                                <td>Comunica claramente una idea general, pero la respuesta carece de especificidad. <hr> Describe algunas fortalezas. </td>
+                                <td>Comunica con claridad y da algunos ejemplos (concretos y abstractos). <hr> Identifica fortalezas y debilidades en forma general ejemplificando algunas de ellas </td>
+                                <td>Comunica efectivamente con detalles de su pasión y dedicación a la profesión utilizando ejemplos. <hr> Identifica claramente fortalezas y debilidades dando ejemplos específicos. </td>
+                                <td>
+                                    <li>Demuestra entusiasmo por la enseñanza.</li>
+                                    <li>Interactúa con los estudiantes.</li>
+                                    <li>Posee un alto nivel de motivación.</li>
+
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos }}</td>
+                                <td>{{rubrica.comentario}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2.</strong> Planificar para el Aprendizaje:
+                                <strong>2A.</strong> ¿Qué criterios usas para planificar una clase?, ¿crees que es importante planificar?, ¿por qué?
+                                    Piensa en una clase que hayas dictado recientemente y describe cómo la planificaste.
+                                </td>
+                                <td>No realiza planes de largo plazo a fin de maximizar el tiempo de enseñanza durante el año </td>
+                                <td>Realiza planificación de largo y corto plazo, pero los toma como unidades aisladas</td>
+                                <td>Se enfoca en la distribución correcta del tiempo a fin de alcanzar todos los objetivos anuales y consolidar conocimientos aislados a través de conceptos más amplios.</td>
+                                <td>Prioriza la enseñanza alineando los planes de corto plazo con los de largo plazo para relacionar contenidos y conceptos previos y futuros.</td>
+                                <td>
+                                    <li>Secuencia el contenido a enseñar</li>
+                                    <li>Relaciona conceptos con conocimientos previos</li>
+                                    <li>Selecciona los objetivos de la clase y alinea las actividades a los mismos</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos2}}</td>
+                                <td>{{rubrica.comentario2}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2B.</strong> ¿Cuál consideras que es un tema o contenido complejo para los estudiantes de tu disciplina/nivel?, ¿qué estrategias has usado/usarías para que todos puedan aprender?</td>
+                                <td>Desconoce conceptos claves de la disciplina o nivel. Muestra manejo no específico de estrategias didácticas. </td>
+                                <td>Tiene conocimientos básico de la disciplina o nivel. Utiliza estrategias poco profundas para la disciplina o nivel. </td>
+                                <td>Demuestra conocimiento de su disciplina, pero no actualización. Utiliza estrategias poco innovadoras para abordar la disciplina o nivel. </td>
+                                <td>Posee un conocimiento actualizado y profundo de su disciplina o nivel. Utiliza estrategias innovadoras para distintos momentos didácticos. </td>
+                                <td>
+                                    <li>Domina en profundidad los conceptos básicos de su disciplina/nivel. </li>
+                                    <li>Conoce la didáctica de su disciplina/nivel. </li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos3}}</td>
+                                <td>{{rubrica.comentario3}}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>3.</strong> Gestión del clima de aprendizaje:
+                                <strong>3A.</strong>  ¿Qué variables del clima de clase consideras importantes para aprender?, ¿cómo los intencionas?
+                                    Cuéntame de una situación en la que hayas tenido dificultad con la conducta de un estudiante y lo que hiciste para abordar la situación.
+                                </td>
+                                <td>Coloca la responsabilidad del logro en el alumnos sólo en el alumno.</td>
+                                <td>Promueve la participación de los alumnos en su propio aprendizaje y asume la responsabilidad primaria en el aprendizaje de los alumnos.</td>
+                                <td>Promueve el entusiasmo por aprender y alienta  a los alumnos a ser participantes activos en el proceso de aprendizaje.</td>
+                                <td>Comunica una alta estima de sus alumnos y altas expectativas ofreciendo ejemplos de cómo se ven en la práctica para abordar los distintos niveles de necesidades de los alumnos.</td>
+                                <td>
+                                    <li>Establece altas espectativas individuales.</li>
+                                    <li>Provee de estrategias a los alumnos para el logro.</li>
+                                    <li>Enfatiza la responsabilidad del alumno.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos4}}</td>
+                                <td>{{rubrica.comentario4}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3B.</strong> Describe cómo promueves altas expectativas de logro en los alumnos durante la clase. Dame un ejemplo de una clase en la que hayas desafiado académicamente a tus alumnos.</td>
+                                <td>Coloca la responsabilidad del logro en el alumnos sólo en el alumno.</td>
+                                <td>Promueve la participación de los alumnos en su propio aprendizaje y asume la responsabilidad primaria en el aprendizaje de los alumnos.</td>
+                                <td>Promueve el entusiasmo por aprender y alienta  a los alumnos a ser participantes activos en el proceso de aprendizaje.</td>
+                                <td>Comunica una alta estima de sus alumnos y altas expectativas ofreciendo ejemplos de cómo se ven en la práctica para abordar los distintos niveles de necesidades de los alumnos.</td>
+                                <td>
+                                    <li>Establece altas expectativas individuales.</li>
+                                    <li>Provee de estrategias a los alumnos para el logro.</li>
+                                    <li>Enfatiza la responsabilidad del alumno.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos5}}</td>
+                                <td>{{rubrica.comentario5}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4.</strong> Implementación de la Enseñanza
+                                    Relata cómo adecuas las necesidades de aprendizaje de tus estudiantes en la sala. Dime cómo decides cuándo diferenciar en una clase.
+                                </td>
+                                <td>No realiza modificaciones en su práctica de enseñanza.</td>
+                                <td>Se apoya en otras fuentes (profesores especialista, textos) para modificar las actividades.</td>
+                                <td>Diferencia la enseñanza y el trabajo para algunos alumnos (Necesidades específicas).</td>
+                                <td>Diferencia para alumnos específicos, grupos y situaciones (alumnos aventajados y con dificultades).</td>
+                                <td>
+                                    <li>Compromete a los alumnos con su aprendizaje.</li>
+                                    <li>Considera las necesidades especiales de sus alumnos.</li>
+                                    <li>Provee trabajo diferenciado en forma apropiada.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos6 }}</td>
+                                <td>{{rubrica.comentario6 }}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>5.</strong> Monitoreo del progreso y potencial de los alumnos   ¿Cómo haces que tus alumnos sepan qué tan bien lo están haciendo respecto de su aprendizaje y de los objetivos de la clase?   Explica cómo compartes los métodos de evaluación con los alumnos y sus familias.
+                                    ¿Utilizas estrategias de metacognición?, ¿cuáles?
+                                </td>
+                                <td>No utiliza variedad de evaluación formativa y sumativa y no provee feedback frecuente.</td>
+                                <td>Utiliza una variedad limitada de evaluaciones formativas y sumativas y provee feedback limitado.</td>
+                                <td>Provee una variedad de evaluaciones formativas y sumativas para medir el desempeño del alumno y les provee de feedback en el proceso.</td>
+                                <td>Crea, selecciona y utiliza efectivamente una variedad de evaluaciones formativas y sumativas para calificar y regularmente interpreta y comunica  a los alumno.s</td>
+                                <td>
+                                    <li>Provee feedback frecuente y oportuno a los alumnos.</li>
+                                    <li>Ofrece oportunidades de evaluación formal e informal.</li>
+                                    <li>Utiliza diferente estrategias/instrumentos de evaluación.</li>
+                                    <li>Promueve la metacognición</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos7}}</td>
+                                <td>{{rubrica.comentario7}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6.</strong> Motivación por pertenecer al Equipo Docente
+                                    ¿Qué pudiste averiguar del Colegio?, ¿cómo crees que puedes aportar a nuestro proyecto educativo?
+                                </td>
+                                <td>Comunica vagamente sus posibles aportes a la institución y no identifica aspectos claves del PEI.</td>
+                                <td>Comunica alguna fortaleza alineada con las necesidades de la institución y demuestra identificar aspectos generales del PEI.</td>
+                                <td>Comunica fortalezas alineadas con las necesidades de la institución, aunque demuestra algún nivel de conocimiento de aspectos claves del PEI. </td>
+                                <td>Identifica fortalezas alineadas con las necesidades de la institución. Expone aspectos claves del PEI demostrando un conocimiento y alineación con el mismo.</td>
+                                <td>
+                                    <li>Plantea fortalezas relacionadas con la forma de la Institución: Responsabilidad, trabajo en equipo, interés en perfeccionamineto y nuevos desafíos.</li>
+                                    <li>Menciona aspectos claves del PEI del colegio.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos8}}</td>
+                                <td>{{rubrica.comentario8}}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>7.</strong>  Innovación
+                                    ¿Has utilizado prácticas innovadoras en la sala de clases?, ¿por qué?, ¿cómo te han resultado?, ¿cuál fue tu rol docente es esa práctica?, ¿dónde aprendiste sobre estas prácticas?, ¿te gusta innovar en la sala de clases, ¿por qué?
+                                    ¿Cómo trabajas colaborativamente con tus pares?, ¿tienes experiencias de trabajo con profesores de otros niveles y/o asignaturas?
+                                </td>
+                                <td>No tiene experiencia en innovación ni demustra interés o necesidad de innovar en la sala de clases y el trabajo colaborativo. </td>
+                                <td>No tiene experiencia en innovación y trabajo colaborativo, pero demuestra interés y necesidad de integrarlo a la práctica. </td>
+                                <td>Tiene experiencias aisladas en innovación y trabajo colaborativo, pero no existosas. Manifiesta interés en mejorar. </td>
+                                <td>Tiene experiencia en prácticas innovadoras y de trabajo colaborativo con sus pares. Es parte fundamental de su práctica. </td>
+                                <td>
+                                    <li>Demuestra una actitud abierta para la innovación en la sala de clases.</li>
+                                    <li>Las prácticas innovadoras que ha implemnetado, le han dado buenos resultados.</li>
+                                    <li>Demuestra un rol docente como facilitador del aprendizaje, no como centro de conocimiento.</li>
+                                    <li>Demuestra capacidad de trabajo colaborativo con sus pares.</li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos9}}</td>
+                                <td>{{rubrica.comentario9}}</td>
+                            </tr>
+                            <tr>
+                                <td> <strong>8.</strong>  Conocimientos generales de educación</td>
+                                <td>Durante la entrevista, se evidencian errores sustantivos o demuestra falta de conocimientos claves del rol y trabajo de un docente.</td>
+                                <td>Durante la entrevista, demuestra nociones generales sobre su rol como profesor o sobre el aprendizaje, pero necesita desarrollarse profesionalmente.</td>
+                                <td>Durante la entrevista, demuestra conocimientos satisfactorios y esperados sobre el contenido, pedagogía y alumnos.</td>
+                                <td>Durante la entrevista, demuestra un conocimiento profundo de los contenidos, pedagogía y alumnos.</td>
+                                <td>
+                                    <li>Utiliza conocimientos precisos y actualizados sobre educación y metodologías activas. </li>
+                                    <li>Utiliza la gramática correctamente.</li>
+                                    <li>Demuestra un conocimiento del alumno como sujeto de aprendizaje.
+                                    </li>
+                                </td>
+                                <td style="text-align: center;">{{rubrica.puntos10}}</td>
+                                <td>{{rubrica.comentario10}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Observaciones Generales</strong></td>
+                                <td colspan="7">{{rubrica.observaciones}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cargo al que postula</strong></td>
+                                <td colspan="7">{{rubrica.cargop}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Niveles en los que realizará clases/trabajará</strong></td>
+                                <td colspan="7">{{rubrica.niveles}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Profesor jefe</strong></td>
+                                <td class="text-center" > {{rubrica.opcion}} </td>
+                            </tr>
+                            <tr>
+                                <td>Comentarios referencias</td>
+                                <td colspan="7">{{rubrica.cometarios_referencias}}</td>
+                            </tr>
+                            <tr>
+                                <td>Remuneración ofrecida</td>
+                                <td colspan="7"> {{rubrica.renumeracion}}</td>
+                            </tr>
+                            <tr>
+                                <td>Horas de contrato ofrecidas</td>
+                                <td class="text-justify" style="white-space:pre-wrap" colspan="7">{{rubrica.horas}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>PUNTAJE FINAL</td>
+                                <td style="text-align: center;">{{puntos.suma}}</td>
+                                <td></td>
+
+                            </tr>
+
+                    </tbody>
+                </table>
+                <div style="padding: 1%;" class="text-right">
+                    <a href="{% url 'psicologa:index' %}" class="btn btn-info"> Salir </a>
+                </div>
+                <br>
+        </div>
+
+    </div>
+    <br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static "js/jquery.plugin.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" integrity="sha256-o8aByMEvaNTcBsw94EfRLbBrJBI+c3mjna/j4LrfyJ8=" crossorigin="anonymous"></script>
+    <script src="{% static 'mycollections/libraries/django-dynamic-formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+</body>
+</html>

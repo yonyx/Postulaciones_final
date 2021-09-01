@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+
+    <div class="container" style="padding-left: 20%;" >  
+
+        <h3 class="text-center">Rúbrica psicolaboral</h3>  
+        <br>
+        <div class="table-responsive">
+
+            <table  class="table-striped "  >
+                <thead>
+                    <tr style=" text-align: center;">
+                        <th width="280" >1. Aspectos Generales</th>
+
+
+                    </tr>
+                </thead>
+
+                    <tbody >
+                        <tr>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <td>Motivación por el cargo</td>
+                                <td>{{rubrica.aspecto}}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td>Grado de adecuación a la entrevista</td>
+                            <td>{{rubrica.aspecto_2}}</td>                 
+                        </tr>
+                    </tbody>
+                    <br>
+            </table>
+            <br>
+            <table class="table-striped ">
+                <thead>
+                    <tr style=" text-align: center;">
+                        <th style="text-align: center;" >2. Competencias</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+                        <td>Pensamiento analítico</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_1}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Planificación y organización</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_2}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Responsabilidad</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_3}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Compromiso organizacional</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_4}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Disposición al aprendizaje</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_5}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Habilidad de liderazgo</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_6}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Perseverancia</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_7}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Autonomía e iniciativa</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_8}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Adaptación al cambio</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_9}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Motivación por el logro de resultados</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_10}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Orientación a la calidad</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_11}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad de trabajo en equipo</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_12}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad de innovación</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_13}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Estabilidad emocional</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_14}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad autocrítica</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_15}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tolarancia a la frustración</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_16}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad de trabajo bajo presión</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_17}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apego a normas y principios</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_18}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Comunicación efectiva</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            {{rubrica.competencia_19}}
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <table class="table-striped ">
+                <thead>
+                    <tr>
+                        <th width="280">3. Conclusión</th>
+                        <th >{{rubrica.conclusion}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <!-- <tr>
+                        <td>Recomendable</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio3" name="opcion22" value="recomendable">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Recomendable con observaciones</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio3" name="opcion22" value="recomendable con observaciones">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>No Recomendable</td>
+                        <td style="vertical-align: text-top; text-align: center;">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="radio3" name="opcion22" value="no recomendable">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            -->
+            </table>
+            <br>
+            <table  class="table-striped ">
+                <thead>
+                    <tr>
+                        <th width="280" colspan="2">4. Fortalezas y posibilidades de mejora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="300" rowspan="4">Fortalezas</td>
+
+                    </tr>
+                    <tr>
+                        <td width="400" >  
+                           {{rubrica.fortalezas}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            {{rubrica.fortalezas2}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            {{rubrica.fortalezas3}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Posibilidadesd de mejora</td>
+                    </tr>
+                    <tr>
+                        <td>{{rubrica.posibilidades}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{rubrica.posibilidades2}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{rubrica.posibilidades3}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table class="table-striped " >
+                <tbody>
+                    <tr>
+                        <th width="300" >5. Sugerencias para jefatura</th>
+                        <td>{{rubrica.sugerencias}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br> 
+        <div class="row">
+            
+            <div class="col-4">{{rubrica.psicologa}}</div>
+            <div class="col-4">{{rubrica.rechazar}}</div>
+        </div>
+
+        <br>
+    </div>
+{% endblock %}
